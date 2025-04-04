@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Все фильмы</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all_films.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Все фильмы</h1>
+            <nav>
+                <a href="{{ url_for('main.main_page') }}" class="main-page-link">Главная страница</a>
+                <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link">Личный кабинет</a>
+            </nav>
+        </div>
+
+        <!-- Форма фильтрации -->
+        <div class="filter-container">
+            <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form">
+              <label for="genre">Жанр:</label>
+              <select name="genre" id="genre">
+                <option value="">Все жанры</option>
+                <option value="комедия">Комедия</option>
+                <option value="драма">Драма</option>
+                <option value="триллер">Триллер</option>
+                <!-- Добавьте нужные жанры -->
+              </select>
+
+              <label for="year">Год выпуска:</label>
+              <input type="number" name="year" id="year" placeholder="Например, 2020">
+
+              <button type="submit">Применить фильтры</button>
+            </form>
+        </div>
+
+        <div class="films-container">
+            {% for film in films %}
+            <div class="film-card">
+                <h2><a href="{{ url_for('film_card.film_card', title=film[0]) }}">{{ film[0] }}</a></h2>
+                <p>{{ film[1] }}</p>
+                <p class="director">Режиссер: {{ director[0] }} {{ director[1] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

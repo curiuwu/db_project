@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Регистрация</title>
+</head>
+<body>
+    <h1>Регистрация</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form method="POST">
+        <input type="text" name="first_name" placeholder="Имя пользователя" required>
+        <input type="text" name="second_name" placeholder="Фамилия пользователя" required>
+        <input type="number" name="age" placeholder="Возраст пользователя" required>
+        <input type="text" name="email" placeholder="Электронная почта" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+    <p>Уже есть аккаунт? <a href="{{ url_for('auth.login') }}">Войти</a></p>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>{{ film[0] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ film[0] }}</h1>
+        <p>{{ film[1] }}</p>
+        <p class="director">Дата {{film[2]}}</p>
+        <p class="director">Режисёр: {{director[0]}} {{director[1]}}</p>
+        <span class="genre">Жанр: {{ film[3] }}</span>
+
+        <div class="sessions">
+            <h2>Сеансы</h2>
+            {% for session in sessions %}
+            <a class="session-button" href="{{ url_for('session_select.select_session', session_id = session[0]) }}">
+                <p>{{ session[1] }} - {{ session[2] }} руб.</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

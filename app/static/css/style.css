@@ -1,0 +1,70 @@
+body {
+    font-family: Plaster, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.date-picker {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.movie-poster {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.seat-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.ticket-list {
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    padding: 10px;
+    border-radius: 5px;
+}
+.pay-button {
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+}
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+margin-bottom: 20px;
+}
+
+.brand {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+
+.brand img {
+max-height: 50px;
+width: auto;
+}
+
+.personal-account {
+padding: 10px 20px;
+background-color: #007bff;
+color: white;
+text-decoration: none;
+border-radius: 5px;
+}
+
+.personal-account:hover {
+background-color: #0056b3;
+}

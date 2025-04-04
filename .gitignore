@@ -1,0 +1,19 @@
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Логи и отладочные файлы
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+
+# Виртуальное окружение и переменные окружения
+venv/
+.env
+
+# Переменные vscode
+.vscode/
