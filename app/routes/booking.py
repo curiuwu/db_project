@@ -1,4 +1,4 @@
-from flask import Blueprint, session, render_template, redirect, request, url_for
+from flask import Blueprint, render_template, session, request, jsonify, redirect, url_for, make_response
 from app.db import get_db_connetction
 from datetime import datetime
 
@@ -23,11 +23,18 @@ def confirme_booking():
 
     #Выбираем информацию о сеансе
     cur.execute("""
-            select sessions.session_id, sessions.time, sessions.price, films.title
-            from sessions
-            join films on sessions.film_id = films.film_id
-            where session_id = %s
-          """, (session_id,))
+            SELECT 
+                sessions.session_id,
+                sessions.date,
+                sessions.time,
+                sessions.price,
+                films.title,
+                films.duration
+            FROM sessions
+            JOIN films ON sessions.film_id = films.film_id
+            WHERE session_id = %s
+    """, (session_id,))
+    print('Session query result:', cur.statusmessage)
     session_info = cur.fetchone()
     
     if not session_info:
@@ -60,61 +67,93 @@ def confirme_booking():
 
 @booking_bp.route("/booking/process", methods=["POST"])
 def process_booking():
-    if 'user_id' not in session:
-        return redirect(url_for('auth.login'))
+    connection = None
+    cur = None
     
-    session_id = request.form.get('session_id')
-    seat_ids = request.form.getlist('seat_ids')
-    
-    if not session_id or not seat_ids:
-        return "Не указаны необходимые параметры", 400
-    
-    connection = get_db_connetction()
-    cur = connection.cursor()
-
     try:
+        # Проверка авторизации
+        if 'user_id' not in session:
+            return jsonify({'error': 'Not logged in'}), 401
+        
+        print('Processing booking...')
+        print('Form data:', dict(request.form))
+        
+        # Парсим параметры
+        session_id = request.form.get('session_id')
+        seat_ids = request.form.getlist('seat_ids')
+        
+        if not session_id or not seat_ids:
+            return jsonify({'error': 'Missing parameters'}), 400
+        
+        try:
+            session_id = int(session_id)
+            seat_ids = [int(seat_id) for seat_id in seat_ids]
+        except ValueError as e:
+            print('Error converting IDs:', str(e))
+            return jsonify({'error': 'Invalid ID format'}), 400
+            
+        print('Session ID:', session_id)
+        print('Seat IDs:', seat_ids)
+        
+        # Подключаемся к БД
+        connection = get_db_connetction()
+        cur = connection.cursor()
+        
+        # Начинаем транзакцию
         cur.execute("BEGIN")
-
+        
+        # Проверяем, не заняты ли места
         cur.execute("""
             SELECT COUNT(*)
             FROM seats
-            WHERE seat_id = ANY(%s) AND session_id = %s AND is_occupied
+            WHERE seat_id = ANY(%s::int[]) AND session_id = %s AND is_occupied
         """, (seat_ids, session_id))
         
         if cur.fetchone()[0] > 0:
             cur.execute("ROLLBACK")
-            return "Некоторые места уже заняты", 400
+            return jsonify({'error': 'Некоторые места уже заняты'}), 400
         
+        # Создаем бронирование
         booking_time = datetime.now()
-
-        for i in range(len(seat_ids)):
-            cur.execute("""
-                        INSERT INTO tickets (session_id, user_id, seat_id)
-                        VALUES (%s, %s, %s)
-                        RETURNING ticket_id
-                        """, (session_id, session['user_id'], seat_ids[i]))
-            ticket_id = cur.fetchone()[0]
+        ticket_id = None
         
-
+        for seat_id in seat_ids:
             cur.execute("""
-                        INSERT INTO ticket_status (ticket_id, status_id, date)
-                        values (%s, 2, %s)
-                            """, (ticket_id, booking_time))
-
+                INSERT INTO tickets (session_id, user_id, seat_id)
+                VALUES (%s, %s, %s)
+                RETURNING ticket_id
+            """, (session_id, session['user_id'], seat_id))
+            ticket_id = cur.fetchone()[0]
+            
+            cur.execute("""
+                INSERT INTO ticket_status (ticket_id, status_id, date)
+                VALUES (%s, 2, %s)
+            """, (ticket_id, booking_time))
+        
+        # Обновляем статус мест
         cur.execute("""
-            update seats
-            set is_occuoied = true
-            where seat_id = any(%s)
+            UPDATE seats
+            SET is_occupied = true
+            WHERE seat_id = ANY(%s::int[])
         """, (seat_ids,))
-
+        
+        # Завершаем транзакцию
         cur.execute("COMMIT")
         
-        return redirect(url_for('user_cabinet.personal_account'))
-    
+        # Возвращаем URL страницы оплаты
+        payment_url = url_for('payment.confirme_payment', booking_id=ticket_id)
+        result = {'redirect_url': payment_url}
+        print('Success response:', result)
+        return jsonify(result)
+        
     except Exception as e:
-        cur.execute("ROLLBACK")
-        return f"Произошла ошибка при бронировании: {str(e)}", 500
+        print('Error during booking:', str(e))
+        if cur is not None:
+            cur.execute("ROLLBACK")
+        return jsonify({'error': str(e)}), 500
         
     finally:
-        cur.close()
-        connection.close()
+        if cur is not None:
+            cur.close()
+        if connection is not None:
+            connection.close()
