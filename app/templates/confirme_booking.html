@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Подтверждение бронирования - {{ session_info[4] }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_confirm.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_confirme.css') }}">
 </head>
 <body>
     <div class="container">
@@ -19,8 +19,8 @@
         <div class="booking-details">
             <h2>{{ session_info[4] }}</h2>
             <div class="session-info">
-                <p class="date">Дата: {{ session_info[1] }}</p>
-                <p class="time">Время: {{ session_info[2]}}</p>
+                <p class="date">Дата: {{ session_info[1].strftime('%d.%m.%Y') }}</p>
+                <p class="time">Время: {{ session_info[2].strftime('%H:%M')}}</p>
                 <p class="duration">Продолжительность: {{ session_info[5] }} минут</p>
             </div>
 
@@ -42,6 +42,52 @@
         </div>
     </div>
 
+<<<<<<< HEAD
    
+=======
+    <script>
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const formData = new FormData(form);
+
+            console.log('Form data:');
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    throw new Error('Ошибка сервера');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response data:', data);
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
+                } else {
+                    throw new Error('Некорректный ответ сервера');
+                    alert('Произошла ошибка при бронировании. Пожалуйста, попробуйте снова.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Произошла ошибка. Пожалуйста, попробуйте снова.');
+            });
+        });
+    </script>
+>>>>>>> 289ff3eb1aec1da3f202fccb8f48181480e0d440
 </body>
 </html>

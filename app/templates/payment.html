@@ -1,13 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Оплата билета - {{ booking_info[3] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}">
 </head>
 <body>
+<<<<<<< HEAD
     <p>При дальнейшем развитии проекта будет добален платёжный сервис, на данный момент мы его не сделали</p>
     <p>Вы можете оплатить билет в кассе кинотеатра</p>
     <p>Спасибо за понимание</p>
+=======
+    <div class="container">
+        <div class="header">
+            <h1>Оплата билета</h1>
+            <nav>
+                <a href="{{ url_for('main.main_page') }}" class="nav-link">Главная страница</a>
+                <a href="{{ url_for('all_films.all_films') }}" class="nav-link">Все фильмы</a>
+                <a href="{{ url_for('user_cabinet.personal_account') }}" class="nav-link">Личный кабинет</a>
+            </nav>
+        </div>
+
+        <div class="payment-details">
+            <h2>{{ booking_info[3] }}</h2>
+            <p class="booking-id">Номер бронирования: {{ booking_info[0] }}</p>
+            <p class="price">Сумма к оплате: {{ booking_info[2] }} ₽</p>
+            
+            <div class="payment-message">
+                <p>При дальнейшем развитии проекта здесь будет добавлен платёжный сервис.</p>
+                <p>На данный момент вы можете проверить статус бронирования в личном кабинете.</p>
+            </div>
+            
+            <div class="actions">
+                <a href="{{ url_for('user_cabinet.personal_account') }}" class="button">Перейти в личный кабинет</a>
+                <a href="{{ url_for('main.main_page') }}" class="button secondary">Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+>>>>>>> 289ff3eb1aec1da3f202fccb8f48181480e0d440
 </body>
 </html>
