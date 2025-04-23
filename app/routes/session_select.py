@@ -6,7 +6,7 @@ select_bp = Blueprint("session_select", __name__)
 @select_bp.route("/select_session/<int:session_id>")
 def select_session(session_id):
     if "user_id" not in session:
-        return redirect(url_for('auth.login', next= request.url))
+        return redirect(url_for('auth.login', next=request.url))  # Добавлен параметр next
     
     connection = get_db_connetction()
     cur = connection.cursor()

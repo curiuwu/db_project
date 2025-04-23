@@ -1,8 +1,19 @@
 from flask import Blueprint, redirect, render_template, flash, url_for, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.db import get_db_connetction
-
+from urllib.parse import urlparse, urljoin
 auth_bp = Blueprint('auth', __name__)
+
+
+
+def is_safe_url(target):
+    """Проверяет, что URL безопасен для редиректа."""
+    if not target:
+        return False
+    ref_url = urlparse(request.host_url)
+    test_url = urlparse(urljoin(request.host_url, target))
+    return test_url.scheme in ('http', 'https') and ref_url.netloc == test_url.netloc
+
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -39,15 +50,16 @@ def register():
     return render_template('register.html')
 
 
-@auth_bp.route('/login', methods = ['GET', 'POST'])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    next_url = request.args.get('next')  # Получаем параметр next из запроса
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
     
         if not email or not password:
             flash('Введите данные во все поля')
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('auth.login', next=next_url))
         
         connection = get_db_connetction()
         cur = connection.cursor()
@@ -59,17 +71,15 @@ def login():
         if user and check_password_hash(user[1], password):
             session['user_id'] = user[0]
             session['username'] = email
-            return redirect(url_for('main.main_page'))
-            # next_url = request.form.get('next')
-            # if not next_url :
-            #     next_url = url_for('user_cabinet.personal_account')
-            # return redirect(next_url)
+
+            # Редирект на next_url, если он безопасен
+            if next_url and is_safe_url(next_url):
+                return redirect(next_url)
+            return redirect(url_for('main.main_page'))   
         else:
-            flash('Не верное имя пользователя или пароль')
-            return redirect(url_for('auth.login'))
-        
-    next_url = request.args.get('next')
-   
+            flash('Неверное имя пользователя или пароль')
+            return redirect(url_for('auth.login', next=next_url))
+    
     return render_template('login.html', next=next_url)
 
 @auth_bp.route('/logout')

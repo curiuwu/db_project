@@ -15,10 +15,9 @@
         </ul>
       {% endif %}
     {% endwith %}
-    <form method="POST">
+    <form method="POST" action="{{ url_for('auth.login', next=next) }}">
         <input type="text" name="email" placeholder="Имя пользователя" required>
         <input type="password" name="password" placeholder="Пароль" required>
-        <input type="hidden" name="next" value="{{ next }}">
         <button type="submit">Войти</button>
     </form>
     <p>Нет аккаунта? <a href="{{ url_for('auth.register') }}">Зарегистрироваться</a></p>

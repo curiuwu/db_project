@@ -7,7 +7,7 @@ booking_bp = Blueprint("booking", __name__)
 @booking_bp.route("/booking/confirme")
 def confirme_booking():
     if "user_id" not in session:
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.login', next=request.url))
     
     session_id = request.args.get("session_id")
     seats_ids = request.args.get("seats")
@@ -103,7 +103,7 @@ def process_booking():
 
         cur.execute("""
             update seats
-            set is_occuoied = true
+            set is_occupied = true
             where seat_id = any(%s)
         """, (seat_ids,))
 

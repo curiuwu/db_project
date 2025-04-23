@@ -13,7 +13,7 @@ def all_films():
     connection = get_db_connetction()
     cur = connection.cursor()
 
-    base_query = """SELECT films.title, films.description, geners.gener_name, films.release_date, films.poster_link FROM film_gener 
+    base_query = """select DISTINCT ON (films.film_id) films.title, films.description, geners.gener_name, films.release_date, films.poster_link FROM film_gener 
     JOIN geners ON film_gener.gener_id = geners.gener_id
     JOIN films ON film_gener.film_id = films.film_id"""
     conditions = []
