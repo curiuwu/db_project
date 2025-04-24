@@ -28,8 +28,7 @@ def confirme_booking():
                 sessions.date,
                 sessions.time,
                 sessions.price,
-                films.title,
-                films.duration
+                films.title
             FROM sessions
             JOIN films ON sessions.film_id = films.film_id
             WHERE session_id = %s
@@ -59,7 +58,7 @@ def confirme_booking():
     cur.close()
     connection.close()
 
-    total_price = len(selected_seats) * session_info[2]
+    total_price = len(selected_seats) * session_info[3]  # session_info[3] is the price (int)
     return render_template("confirme_booking.html", 
                             session_info=session_info, 
                             selected_seats=selected_seats,
@@ -132,15 +131,9 @@ def process_booking():
         
         # Обновляем статус мест
         cur.execute("""
-<<<<<<< HEAD
             update seats
             set is_occupied = true
             where seat_id = any(%s)
-=======
-            UPDATE seats
-            SET is_occupied = true
-            WHERE seat_id = ANY(%s::int[])
->>>>>>> 289ff3eb1aec1da3f202fccb8f48181480e0d440
         """, (seat_ids,))
         
         # Завершаем транзакцию

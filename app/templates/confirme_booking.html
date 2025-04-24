@@ -42,52 +42,5 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-   
-=======
-    <script>
-        document.getElementById('booking-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const form = this;
-            const formData = new FormData(form);
 
-            console.log('Form data:');
-            for (let pair of formData.entries()) {
-                console.log(pair[0] + ': ' + pair[1]);
-            }
-
-            fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json'
-                },
-                body: formData
-            })
-            .then(response => {
-                console.log('Response status:', response.status);
-                if (!response.ok) {
-                    throw new Error('Ошибка сервера');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Response data:', data);
-                if (data.error) {
-                    throw new Error(data.error);
-                }
-                if (data.redirect_url) {
-                    window.location.href = data.redirect_url;
-                } else {
-                    throw new Error('Некорректный ответ сервера');
-                    alert('Произошла ошибка при бронировании. Пожалуйста, попробуйте снова.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Произошла ошибка. Пожалуйста, попробуйте снова.');
-            });
-        });
-    </script>
->>>>>>> 289ff3eb1aec1da3f202fccb8f48181480e0d440
-</body>
 </html>
