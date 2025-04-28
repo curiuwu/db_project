@@ -20,20 +20,16 @@
                 <div class="user-info-section">
                     <!-- 1. Секция: Имя, Фамилия, Возраст -->
                     <div class="inputs-row">
-                        <input type="text" class="input" name="first_name" placeholder="Имя" value="{{ user.first_name }}" readonly>
-                        <input type="text" class="input" name="second_name" placeholder="Фамилия" value="{{ user.second_name }}" readonly>
-                        <input type="number" class="input" name="age" placeholder="Возраст" value="{{ user.age }}" readonly>
+                        <input type="text" class="input" name="first_name" placeholder="Имя" value="{{ user[0] }}" readonly>
+                        <input type="text" class="input" name="second_name" placeholder="Фамилия" value="{{ user[1] }}" readonly>
+                        <input type="number" class="input" name="age" placeholder="Возраст" value="{{ user[2] }}" readonly>
                     </div>
                     
                     <!-- 2. Секция: Логин (почта) -->
                     <div class="input-section">
-                        <input type="email" class="input" name="email" placeholder="Почта" value="{{ user.email }}">
+                        <input type="email" class="input" name="email" placeholder="Почта" value="{{ user[3] }}">
                     </div>
                     
-                    <!-- 3. Секция: Номер телефона -->
-                    <div class="input-section">
-                        <input type="tel" class="input" name="phone" placeholder="Номер телефона" value="{{ user.phone }}">
-                    </div>
                 </div>
 
                 <!-- Правый сегмент: Билеты -->
@@ -44,10 +40,9 @@
                             {% for ticket in tickets %}
                             <div class="ticket-item">
                                 <div class="ticket-info">
-                                    <h3>{{ ticket.movie_title }}</h3>
-                                    <p>Дата: {{ ticket.date }}</p>
-                                    <p>Время: {{ ticket.time }}</p>
-                                    <p>Место: {{ ticket.seat }}</p>
+                                    <p>Дата: {{ ticket[0] }}</p>
+                                    <p>Время: {{ ticket[1] }}</p>
+                                    <p>Место: {{ ticket[2] }}</p>
                                 </div>
                                 <button class="download-btn">
                                     <img src="{{ url_for('static', filename='images/download-icon.svg') }}" alt="Скачать">
