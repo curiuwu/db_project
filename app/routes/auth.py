@@ -21,7 +21,7 @@ def register():
         first_name = request.form.get('first_name')
         second_name = request.form.get('second_name')
         age = request.form.get('age')
-        email = request.form.get('email')
+        email = request.form.get('login')
         password = request.form.get('password')
 
         if not first_name or not second_name or not age or not email or not password:
