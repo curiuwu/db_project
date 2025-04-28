@@ -35,14 +35,14 @@ def register():
         cur.execute('SELECT user_id FROM users where first_name = %s AND second_name = %s', (first_name, second_name,))
 
         if cur.fetchone():
-            flash('Такой пользователь уже существует')
-            cur.close()
-            connection.close()
-            return redirect(url_for('auth.register'))
+             flash('Такой пользователь уже существует')
+             cur.close()
+             connection.close()
+             return redirect(url_for('auth.register'))
         
 
         cur.execute("""INSERT INTO users (first_name, second_name, age, email, hashed_password)
-                    VALUES(%s, %s, %s, %s, %s)""", (first_name, second_name, age, email, hashed_password))
+                     VALUES(%s, %s, %s, %s, %s)""", (first_name, second_name, age, email, hashed_password))
         connection.commit()
         cur.close()
         connection.close()

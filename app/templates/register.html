@@ -3,26 +3,53 @@
 <head>
     <meta charset="utf-8">
     <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 </head>
 <body>
-    <h1>Регистрация</h1>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    <form method="POST">
-        <input type="text" name="first_name" placeholder="Имя пользователя" required>
-        <input type="text" name="second_name" placeholder="Фамилия пользователя" required>
-        <input type="number" name="age" placeholder="Возраст пользователя" required>
-        <input type="text" name="email" placeholder="Электронная почта" required>
-        <input type="password" name="password" placeholder="Пароль" required>
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-    <p>Уже есть аккаунт? <a href="{{ url_for('auth.login') }}">Войти</a></p>
+    <div class="container">
+        <div class="card">
+            <!-- 1. Секция: Заголовок -->
+            <div class="card-title-section">
+                <h1>Регистрация</h1>
+            </div>
+            <!-- 2. Секция: Имя, Фамилия, Возраст -->
+            <form method="POST" autocomplete="off">
+                <div class="inputs-row">
+                    <input type="text" class="input" name="first_name" placeholder="Имя" required>
+                    <input type="text" class="input" name="second_name" placeholder="Фамилия" required>
+                    <input type="number" class="input" name="age" placeholder="Возраст" required>
+                </div>
+                <!-- 3. Секция: Пароль + кнопка показать/скрыть -->
+                <div class="input-section">
+                    <input type="password" class="input" name="password" id="password" placeholder="Пароль" required>
+                </div>
+                <!-- 4. Секция: Кнопка регистрации -->
+                <div>
+                    <button type="submit" class="register-btn button" id="register-btn" disabled>Зарегистрироваться</button>
+                </div>
+                <div class="login-link">
+                    Уже есть аккаунт? <a href="{{ url_for('auth.login') }}">Войти</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Включение кнопки регистрации только при заполнении всех полей
+        function checkForm() {
+            const firstName = document.getElementsByName('first_name')[0].value.trim();
+            const secondName = document.getElementsByName('second_name')[0].value.trim();
+            const age = document.getElementsByName('age')[0].value.trim();
+            const password = document.getElementsByName('password')[0].value.trim();
+            const btn = document.getElementById('register-btn');
+            btn.disabled = !(firstName && secondName && age && password);
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', checkForm);
+            });
+            checkForm();
+        });
+    </script>
 </body>
 </html>
