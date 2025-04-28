@@ -1,0 +1,121 @@
+/* Стили для основного контейнера карточки */
+.account-content {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Стили для левого сегмента (информация о пользователе) */
+.user-info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Стили для правого сегмента (билеты) */
+.tickets-section {
+    flex: 1;
+}
+
+/* Стили для карточки с билетами */
+.tickets-card {
+    background-color: #2a3d6e;
+    border-radius: 30px;
+    padding: 20px;
+    height: 100%;
+}
+
+.tickets-card h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Стили для списка билетов */
+.tickets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Стили для отдельного билета */
+.ticket-item {
+    background-color: #4A6382;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-info {
+    color: #ffffff;
+}
+
+.ticket-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+}
+
+.ticket-info p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+/* Стили для кнопки скачивания */
+.download-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s;
+}
+
+.download-btn:hover {
+    transform: scale(1.1);
+}
+
+.download-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Стили для кнопки выхода */
+.logout-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logout-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4A6382;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #5a7ab2;
+}
+
+/* Стили для полей ввода */
+.input[readonly] {
+    background-color: #4A6382;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .account-content {
+        flex-direction: column;
+    }
+    
+    .tickets-card {
+        margin-top: 20px;
+    }
+} 
