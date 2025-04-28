@@ -21,7 +21,7 @@ def register():
         first_name = request.form.get('first_name')
         second_name = request.form.get('second_name')
         age = request.form.get('age')
-        email = request.form.get('email')
+        email = request.form.get('login')
         password = request.form.get('password')
 
         if not first_name or not second_name or not age or not email or not password:
@@ -35,14 +35,14 @@ def register():
         cur.execute('SELECT user_id FROM users where first_name = %s AND second_name = %s', (first_name, second_name,))
 
         if cur.fetchone():
-            flash('Такой пользователь уже существует')
-            cur.close()
-            connection.close()
-            return redirect(url_for('auth.register'))
+             flash('Такой пользователь уже существует')
+             cur.close()
+             connection.close()
+             return redirect(url_for('auth.register'))
         
 
         cur.execute("""INSERT INTO users (first_name, second_name, age, email, hashed_password)
-                    VALUES(%s, %s, %s, %s, %s)""", (first_name, second_name, age, email, hashed_password))
+                     VALUES(%s, %s, %s, %s, %s)""", (first_name, second_name, age, email, hashed_password))
         connection.commit()
         cur.close()
         connection.close()

@@ -1,70 +1,159 @@
+/* Сброс/нормализация и базовые стили для body */
 body {
-    font-family: Plaster, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-.header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-.date-picker {
+    color: white; 
+    font-family: 'Lato', sans-serif;      /* Основной шрифт */
+    background-color: #1D1D1D;            /* Тёмный фон по умолчанию */
+    min-height: 100vh;                    /* Минимальная высота на весь экран */
     display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.movie-poster {
-    text-align: center;
-    margin-bottom: 20px;
-}
-.seat-selection {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
-}
-.ticket-list {
-    margin-bottom: 20px;
-    border: 1px solid #000000;
-    padding: 10px;
-    border-radius: 5px;
-}
-.pay-button {
-    display: flex;
-    text-align: center;
-    margin-top: 20px;
-}
-.header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 20px;
-margin-bottom: 20px;
+    justify-content: center;
+    margin: 0;
 }
 
+/* Стили для всех заголовков */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif;      /* Шрифт Lato */
+    font-weight: bold;                    /* Жирный шрифт */
+}
+
+/* Стили для ссылок */
+a {                      
+    text-decoration: none;                /* Без подчёркивания */
+    color:#4A6382;
+}
+
+/* Контейнер для центрирования и ограничения ширины контента */
+.container {
+    max-width: 500px;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 0px;
+}
+
+/* Стили для шапки сайта */
+.header {
+    text-align: center;                   /* Центрируем текст */
+    margin-bottom: 20px;                  /* Отступ снизу */
+    display: flex;                        /* Гибкое расположение элементов */
+    justify-content: space-between;       /* Элементы по краям */
+    align-items: center;                  /* Выравнивание по центру по вертикали */
+    padding: 20px;                        /* Внутренний отступ */
+}
+
+/* Стили для футера */
+.footer {
+    background-color: #0F0F0F;            /* Тёмный фон */
+    color: white;                         /* Белый текст */
+    font-family: 'Lato', sans-serif;      /* Шрифт Lato */
+    padding: 20px;                        /* Внутренний отступ */
+    text-align: center;                   /* Центрируем текст */
+    position: fixed;                      /* Фиксируем внизу */
+    bottom: 0;                            /* Прижимаем к низу */
+    width: 100%;                          /* На всю ширину */
+}
+
+/* Общий стиль для карточек */
+.card {
+    background-color: #E3C39D;            /* Светлый фон карточки */
+    border-radius: 30px;                  /* Скругление углов */
+    padding: 20px;                        /* Внутренний отступ */
+    margin: 20px;                       /* Вертикальные отступы */
+    transform: scale(1.5);
+}
+
+
+/* Общий стиль для кнопок */
+.button, button {
+    background-color: #2a3d6e;            /* Синий фон */
+    color: white;                         /* Белый текст */
+    font-family: 'Lato', sans-serif;      /* Шрифт Lato */
+    border: none;                         /* Без рамки */
+    border-radius: 5px;                   /* Скругление углов */
+    padding: 10px 20px;                   /* Внутренний отступ */
+    cursor: pointer;                      /* Курсор-рука */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета */
+}
+
+/* Эффект наведения для кнопок */
+.button:hover, button:hover {
+    background-color: #5a7ab2;            /* Светло-синий при наведении */
+}
+
+/* Общий стиль для полей ввода */
+.input, input, textarea, select {
+    background-color: #4A6382;            /* Синий фон */
+    color: white;                         /* Белый текст */
+    font-family: 'Lato', sans-serif;      /* Шрифт Lato */
+    border: none;                         /* Без рамки */
+    border-radius: 30px;                   /* Скругление углов */
+    padding: 10px;                        /* Внутренний отступ */
+    width: 100%;                          /* На всю ширину */
+    box-sizing: border-box;                /* Учитываем padding в ширине */
+}
+
+/* Стили для placeholder в полях ввода */
+input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);      /* Полупрозрачный белый */
+}
+
+/* Стили для выбора даты */
+.date-picker {
+    display: flex;                        
+    justify-content: center;              
+    margin-bottom: 20px;                  
+}
+
+/* Стили для постера фильма */
+.movie-poster {
+    text-align: center;                   
+    margin-bottom: 20px;                  
+}
+
+/* Стили для выбора мест */
+.seat-selection {
+    display: flex;                        
+    flex-direction: column;               
+    align-items: center;                  
+    margin-bottom: 20px;                  
+}
+
+/* Стили для списка билетов */
+.ticket-list {
+    margin-bottom: 20px;                  
+    border: 1px solid #000000;            
+    padding: 10px;                        
+    border-radius: 5px;                   
+}
+
+/* Стили для кнопки оплаты */
+.pay-button {
+    display: flex;                        
+    text-align: center;                   
+    margin-top: 20px;                     
+}
+
+/* Стили для бренда (логотипа) */
 .brand {
-display: flex;
-align-items: center;
-gap: 20px;
+    display: flex;                        
+    align-items: center;                  
+    gap: 20px;                            
 }
 
 .brand img {
-max-height: 50px;
-width: auto;
+    max-height: 50px;                     
+    width: auto;                          
 }
 
+/* Стили для ссылки на личный кабинет */
 .personal-account {
-padding: 10px 20px;
-background-color: #007bff;
-color: white;
-text-decoration: none;
-border-radius: 5px;
+    padding: 10px 20px;                   
+    background-color: #007bff;            
+    color: white;                         
+    text-decoration: none;                 
+    border-radius: 5px;                   
 }
 
+/* Эффект наведения для ссылки на личный кабинет */
 .personal-account:hover {
-background-color: #0056b3;
+    background-color: #0056b3;            
 }

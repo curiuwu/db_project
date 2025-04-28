@@ -1,0 +1,60 @@
+/* Секция с заголовком */
+.card-title-section {
+    border: 3px solid #ffddb4;          /* Жирная рамка бежевого цвета */
+    border-radius: 30px;                /* Сильно скругленные углы */
+    margin-bottom: 30px;                /* Большой отступ снизу */
+    padding: 10px;                      /* Внутренние отступы */
+    display: flex;                      /* Используем flexbox */
+    justify-content: center;            /* Центрирование по горизонтали */
+    align-items: center;                /* Центрирование по вертикали */
+}
+
+/* Заголовок внутри секции */
+.card-title-section h1 {
+    color: #ffffff;                     /* Белый цвет текста */
+    font-family: 'Lato', sans-serif;    /* Шрифт Lato */
+    font-weight: bold;                  /* Жирный шрифт */
+    font-size: 2rem;                    /* Крупный размер текста */
+    margin: 0;                          /* Убираем стандартные отступы */
+}
+
+/* Секция с полями ввода */
+.input-section {
+    align-items: center;                /* Центрирование элементов */
+    margin-bottom: 30px;                /* Отступ между секцией и кнопкой */
+}
+
+/* Поля ввода */
+.input {
+    margin-bottom: 10px;                /* Небольшой отступ между полями */
+}
+
+/* Убираем отступ у последнего поля */
+.input:last-child {
+    margin-bottom: 0;                   /* Убираем отступ у последнего поля */
+}
+
+/* Кнопка "Вход" */
+.login-btn {
+    width: 100%;                        /* На всю ширину контейнера */
+    padding: 10px;                      /* Внутренние отступы */
+    background: #4A6382;                /* Темно-синий фон */
+    color: #fff;                        /* Белый текст */
+    border: 3px solid #ffddb4;          /* Бежевая рамка */
+    border-radius: 30px;                /* Сильно скругленные углы */
+    cursor: pointer;                    /* Курсор-указатель */
+    transition: background 0.2s;        /* Плавное изменение фона */
+}
+
+/* Отключенная кнопка входа */
+.login-btn:disabled {
+    background: #E3C39D;                /* Светло-бежевый фон */
+    cursor: not-allowed;                /* Курсор "запрещено" */
+}
+
+/* Секция со ссылкой на регистрацию */
+.login-link {
+    text-align: center;                 /* Центрирование текста */
+    margin-top: 10px;                   /* Отступ сверху */
+    color: #ffffff;                     /* Белый цвет текста */
+}

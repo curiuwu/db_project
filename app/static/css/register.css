@@ -1,0 +1,57 @@
+/* Секция заголовка карточки регистрации */
+.card-title-section {
+    border: 3px solid #ffddb4;          /* Жирная рамка насыщенного цвета */
+    border-radius: 30px;                 /* Скругление углов */
+    margin-bottom: 30px;                  /* Отступ снизу */
+    padding: 10px;                     /* Вертикальные отступы */
+    display: flex;                       /* Центрирование содержимого */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Стили для заголовка внутри секции */
+.card-title-section h1 {
+    color: #ffffff;                         /* Белый цвет текста */
+    font-family: 'Lato', sans-serif;     /* Шрифт Lato */
+    font-weight: bold;                   /* Жирный шрифт */
+    font-size: 2rem;                     /* Крупный размер */
+    margin: 0;                           /* Убираем отступы */
+}
+
+/* Секция с тремя полями ввода в одну строку */
+.inputs-row {
+    display: flex;                       /* Располагаем поля в строку */
+    gap: 10px;                           /* Промежуток между полями */
+    margin-bottom: 10px; /* Отступ между полями и кнопкой */
+}
+
+/* Секции для ввода пароля и повтора пароля */
+.input-section {
+    align-items: center;               
+    margin-bottom: 10px; /* Отступ между полями и кнопкой */
+}
+
+/* Кнопка "Зарегистрироваться" */
+.register-btn {
+    width: 100%;                         /* На всю ширину */
+    padding: 10px;                       /* Внутренний отступ */
+    background: #4A6382;                 /* Синий фон */
+    color: #fff;                         /* Белый текст */
+    border: 3px solid #ffddb4;                    
+    border-radius: 30px;                  /* Скругление углов */
+    cursor: pointer;                     /* Курсор-рука */
+    transition: background 0.2s;         /* Плавное изменение фона */
+}
+
+/* Отключённая кнопка регистрации */
+.register-btn:disabled {
+    background: #E3C39D;                 
+    cursor: not-allowed;                 /* Курсор "запрещено" */
+}
+
+/* Секция со ссылкой "Войти" */
+.login-link {
+    text-align: center;                  /* Центрируем текст */
+    margin-top: 10px;                    /* Отступ сверху */
+    color: #ffffff; 
+}

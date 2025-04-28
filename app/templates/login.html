@@ -3,23 +3,43 @@
 <head>
     <meta charset="utf-8">
     <title>Вход</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
-    <h1>Вход</h1>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    <form method="POST" action="{{ url_for('auth.login', next=next) }}">
-        <input type="text" name="email" placeholder="Имя пользователя" required>
-        <input type="password" name="password" placeholder="Пароль" required>
-        <button type="submit">Войти</button>
-    </form>
-    <p>Нет аккаунта? <a href="{{ url_for('auth.register') }}">Зарегистрироваться</a></p>
+    <div class="container">
+        <div class="card">
+            <div class="card-title-section">
+                <h1>Вход</h1>
+            </div>
+            <form method="POST" action="{{ url_for('auth.login', next=next) }}">
+                <div class="input-section">
+                    <input type="text" class="input" name="email" placeholder="Логин" required>
+                    <input type="password" class="input" name="password" placeholder="Пароль" required>
+                </div>
+                <div>
+                    <button type="submit" class="login-btn button" id="login-btn" disabled>Войти</button>
+                </div>
+                <div class="login-link">
+                    Нет аккаунта? <a href="{{ url_for('auth.register') }}">Зарегистрироваться</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Включение кнопки входа только при заполнении всех полей
+        function checkForm() {
+            const email = document.getElementsByName('email')[0].value.trim();
+            const password = document.getElementsByName('password')[0].value.trim();
+            const btn = document.getElementById('login-btn');
+            btn.disabled = !(email && password);
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', checkForm);
+            });
+            checkForm();
+        });
+    </script>
 </body>
 </html>
