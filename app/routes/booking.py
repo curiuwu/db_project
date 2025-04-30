@@ -44,7 +44,7 @@ def confirme_booking():
     #Выбираем информацию о всех наших местах местах
 
     cur.execute("""
-            select seat_id, row_number, seat_number
+            select seat_id, row, seat_number
             from seats
             where seat_id = any(%s::int[]) and not is_occupied 
             """, (seats_ids,))

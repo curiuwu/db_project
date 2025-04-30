@@ -26,10 +26,10 @@ def select_session(session_id):
     cur.execute("""select hall_id from sessions where session_id = %s""", (session_id,))
     hall_id = cur.fetchone()
     #Выбор всех мест
-    cur.execute(""" select seat_id, row_number, seat_number
+    cur.execute(""" select seat_id, row, seat_number
                     from seats
                     where hall_id = %s
-                    order by row_number, seat_number""", (hall_id,))
+                    order by row, seat_number""", (hall_id,))
     seats = cur.fetchall()
 
     cur.close()

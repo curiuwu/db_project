@@ -17,7 +17,7 @@
 
         <!-- Форма фильтрации -->
         <div class="filter-container">
-            <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form">
+            <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form", name="genre">
               <label for="genre">Жанр:</label>
               <select name="genre" id="genre">
                 <option value="">Все жанры</option>
