@@ -39,14 +39,93 @@
     font-size: 0.9em;
 }
 
-.header {
-    padding: 20px;
-    background: #f8f9fa;
-    margin-bottom: 20px;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.date-filter .month-nav {
+    background-color: #4A6382;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.date-filter .current-month {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.date-filter .week-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.date-filter .day-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #4A6382;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.date-filter .day-button span {
+    display: block;
+}
+
+.date-filter .day-button:hover {
+    background-color: #4A6382;
+}
+
+.date-filter .day-button.active {
+    background-color: #5a7ab2;
+}
+
+.date-filter .day-button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.date-filter .day-button:active {
+    background-color: #5a7ab2;
+}
+
+.date-filter .day-button-group .day-button {
+    outline: none;
+}
+
+.date-filter .day-button-group .day-button.active {
+    pointer-events: none;
 }

@@ -10,7 +10,12 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.container {
+    max-width: 1000px;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 0px;
+}
 /* Стили для всех заголовков */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', sans-serif;      /* Шрифт Lato */
@@ -72,7 +77,7 @@ a {
 
 /* Общий стиль для кнопок */
 .button{
-    background-color: #2a3d6e;            /* Синий фон */
+    background-color: #4A6382;            /* Синий фон */
     color: white;                         /* Белый текст */
     font-family: 'Lato', sans-serif;      /* Шрифт Lato */
     border: none;                         /* Без рамки */
@@ -104,64 +109,9 @@ input::placeholder, textarea::placeholder {
     color: rgba(255, 255, 255, 0.7);      /* Полупрозрачный белый */
 }
 
-/* Стили для выбора даты */
-.date-picker {
-    display: flex;                        
-    justify-content: center;              
-    margin-bottom: 20px;                  
-}
 
 /* Стили для постера фильма */
 .movie-poster {
     text-align: center;                   
     margin-bottom: 20px;                  
-}
-
-/* Стили для выбора мест */
-.seat-selection {
-    display: flex;                        
-    flex-direction: column;               
-    align-items: center;                  
-    margin-bottom: 20px;                  
-}
-
-/* Стили для списка билетов */
-.ticket-list {
-    margin-bottom: 20px;                  
-    border: 1px solid #000000;            
-    padding: 10px;                        
-    border-radius: 5px;                   
-}
-
-/* Стили для кнопки оплаты */
-.pay-button {
-    display: flex;                        
-    text-align: center;                   
-    margin-top: 20px;                     
-}
-
-/* Стили для бренда (логотипа) */
-.brand {
-    display: flex;                        
-    align-items: center;                  
-    gap: 20px;                            
-}
-
-.brand img {
-    max-height: 50px;                     
-    width: auto;                          
-}
-
-/* Стили для ссылки на личный кабинет */
-.personal-account {
-    padding: 10px 20px;                   
-    background-color: #007bff;            
-    color: white;                         
-    text-decoration: none;                 
-    border-radius: 5px;                   
-}
-
-/* Эффект наведения для ссылки на личный кабинет */
-.personal-account:hover {
-    background-color: #0056b3;            
 }
