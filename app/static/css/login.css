@@ -1,3 +1,9 @@
+.container {
+    max-width: 500px;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 0px;
+}
 /* Секция с заголовком */
 .card-title-section {
     border: 3px solid #ffddb4;          /* Жирная рамка бежевого цвета */
