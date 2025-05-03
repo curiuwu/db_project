@@ -37,9 +37,9 @@
         <div class="films-container">
             {% for film in films %}
             <div class="film-card">
-                <h2><a href="{{ url_for('film_card.film_card', title=film[0]) }}">{{ film[0] }}</a></h2>
-                <p>{{ film[1] }}</p>
-                <p class="director">Режиссер: {{ director[0] }} {{ director[1] }}</p>
+                <h2><a href="{{ url_for('film_card.film_card', title=film[0]) }}">{{ film.title }}</a></h2>
+                <p>{{ film.description }}</p>
+                <p class="director">Режиссер: {{ film.director }}</p>
             </div>
             {% endfor %}
         </div>
