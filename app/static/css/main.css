@@ -1,130 +1,61 @@
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
+    display: block; /* Устанавливаем нормальный поток документа */
 }
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    text-align: center;
-}
-
 h1 {
-    color: #333;
     font-size: 2.5em;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.films-link, .personal-account-link {
-    text-decoration: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.films-link {
-    background-color: #4CAF50;
+    font-weight: bold;
+    margin: 0;
     color: white;
 }
-
+.container {
+    max-width: 1000px;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 0px;
+}
+.films-link,
 .personal-account-link {
-    background-color: #2196F3;
-    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.films-link:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.personal-account-link:hover {
-    background-color: #1976D2;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
+/* Сетка карточек */
 .films-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Табличный вид */
+    gap: 20px; /* Расстояние между карточками */
+    padding: 20px; /* Внутренний отступ */
 }
 
+/* Стили для карточек фильмов с основой из style.css */
 .film-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background: white;
+    background-color: #E3C39D;            /* Светлый фон карточки */
+    border-radius: 30px;                  /* Скругление углов */
+    padding: 20px;                        /* Внутренний отступ */
+    margin: 20px;                       /* Вертикальные отступы */
+    transform: scale(1.5);
 }
 
-.film-card h2 {
-    color: #333;
-    margin-top: 0;
-    margin-bottom: 10px;
+/* Стили для карточки с лозунгом */
+.slogan-card {
+    display: grid;
+    justify-content: top;
+    align-items: center;
+    height: 25vh; /* Занимает 1/4 страницы */    
+    background-color: #E3C39D; /* Светлый фон */
+    border-radius: 30px; /* Скругленные углы */
+    color: #1D1D1D; /* Темный текст */
+    font-family: 'Lato', sans-serif;
     font-size: 1.5em;
+    font-weight: bold;
+    margin: 20px auto; /* Отступ сверху 20px и центрирование по горизонтали */
+    width: 80%; /* Устанавливаем ширину для центрирования */
+    margin-bottom: 20px; /* Отступ от карточек фильмов */
+    margin-top: 120px; /* Увеличиваем отступ сверху для устранения наложения */
 }
 
-.film-card p {
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 10px;
-}
-
-.film-card .director {
-    color: #888;
-    font-style: italic;
-}
-
-.film-card .genre {
-    display: inline-block;
-    background: #f0f0f0;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.9em;
-}
-
-.header {
-    padding: 20px;
-    background: #f8f9fa;
-    margin-bottom: 20px;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Адаптивный дизайн */
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-
-    nav {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .films-link, .personal-account-link {
-        width: 200px;
-    }
+.slogan-card h1 {
+    font-size: 2.5vw; /* Размер текста адаптируется под размер карточки */
+    text-align: center; /* Центрируем текст */
+    margin: 0; /* Убираем лишние отступы */
 }
