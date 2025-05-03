@@ -4,10 +4,11 @@ body {
     font-family: 'Lato', sans-serif;      /* Основной шрифт */
     background-color: #1D1D1D;            /* Тёмный фон по умолчанию */
     min-height: 100vh;                    /* Минимальная высота на весь экран */
-    display: flex;
+    display: flex; /* Устанавливаем нормальный поток документа */
     align-items: center;
     justify-content: center;
     margin: 0;
+    padding: 0;
 }
 
 /* Стили для всех заголовков */
@@ -22,22 +23,25 @@ a {
     color:#4A6382;
 }
 
-/* Контейнер для центрирования и ограничения ширины контента */
-.container {
-    max-width: 500px;
-    width: 100%;
-    padding: 0;
-    padding-bottom: 0px;
-}
-
 /* Стили для шапки сайта */
 .header {
+    background-color: #0F0F0F;            /* Тёмный фон */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
     text-align: center;                   /* Центрируем текст */
-    margin-bottom: 20px;                  /* Отступ снизу */
     display: flex;                        /* Гибкое расположение элементов */
-    justify-content: space-between;       /* Элементы по краям */
+    justify-content: end;      /* Элементы справа */
     align-items: center;                  /* Выравнивание по центру по вертикали */
-    padding: 20px;                        /* Внутренний отступ */
+    padding: 20px;                        /* Уменьшаем внутренний отступ для уменьшения пространства под header */                      
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(74, 99, 130, 0.5); /* Add subtle shadow */
+    margin-bottom: 0; /* Убираем отступ снизу */
+}
+
+.header a {
+    margin-left: 20px; /* Добавляем расстояние между кнопками */
 }
 
 /* Стили для футера */
@@ -61,9 +65,13 @@ a {
     transform: scale(1.5);
 }
 
+/* Стили для карточки с лозунгом */
+.slogan-card {
+    margin-top: 20px; /* Добавляем отступ сверху для точного позиционирования */
+}
 
 /* Общий стиль для кнопок */
-.button, button {
+.button{
     background-color: #2a3d6e;            /* Синий фон */
     color: white;                         /* Белый текст */
     font-family: 'Lato', sans-serif;      /* Шрифт Lato */

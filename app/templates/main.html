@@ -3,24 +3,28 @@
 <head>
     <meta charset="utf-8">
     <title>Главная страница</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Главная страница</h1>
-        <nav>
-            <a href="{{ url_for('all_films.all_films') }}" class="films-link">Все фильмы</a>
-            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link">Личный кабинет</a>
-        </nav>
-    </div>
-
-    <div class="films-container">
-        {% for film in films %}
-        <div class="film-card">
-            <h2><a href="{{ url_for('film_card.film_card', title=film[0]) }}">{{ film[0] }}</a></h2>
-            <p>{{ film[1] }}</p>
-            <p class="director">Стоимость {{film[2]}}</p>
+    <header class="header">
+        <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+        <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
+    </header>
+    <div class="container"></div>
+        <div class="slogan-card">
+            <h1>Добро пожаловать в наш кинотеатр!</h1>
         </div>
-        {% endfor %}
+
+        <div class="films-container">
+            {% for film in films %}
+            <div class="film-card">
+                <h2><a href="{{ url_for('film_card.film_card', title=film[0]) }}">{{ film[0] }}</a></h2>
+                <p>{{ film[1] }}</p>
+                <p class="director">Стоимость: {{ film[2] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
