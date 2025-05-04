@@ -8,8 +8,10 @@
 </head>
 <body>
     <header class="header">
-        <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
-        <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
+        <div class="button-wrapper">
+            <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
+            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
+        </div>
     </header>
     <div class="container">
         <div class="date-filter">
@@ -30,7 +32,8 @@
 
             <div class="filter-card">
                 <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form" name="genre">
-                  <select name="genre" id="genre">
+                    <label for="genre"><h1>Фильтр</h1></label>
+                    <select name="genre" id="genre">
                     <option value="">Выбор жанра</option>
                     <option value="комедия">Комедия</option>
                     <option value="драма">Драма</option>

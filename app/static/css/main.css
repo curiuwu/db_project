@@ -8,7 +8,7 @@ h1 {
     color: white;
 }
 .container {
-    max-width: 1000px;
+    max-width: 1200px;
     width: 100%;
     padding: 0;
     padding-bottom: 0px;
@@ -19,21 +19,43 @@ h1 {
     font-weight: bold;
 }
 
-/* Сетка карточек */
+/* Сетка карточек фильмов */
 .films-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Табличный вид */
+    display: grid; /* Используем CSS Grid для размещения карточек */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Автоматическая подстройка колонок */
     gap: 20px; /* Расстояние между карточками */
     padding: 20px; /* Внутренний отступ */
 }
 
-/* Стили для карточек фильмов с основой из style.css */
+/* Стили для карточек фильмов */
 .film-card {
-    background-color: #E3C39D;            /* Светлый фон карточки */
-    border-radius: 30px;                  /* Скругление углов */
-    padding: 20px;                        /* Внутренний отступ */
-    margin: 20px;                       /* Вертикальные отступы */
-    transform: scale(1.5);
+    background-color: #E3C39D; /* Светлый фон карточки */
+    border-radius: 30px; /* Скругление углов */
+    padding: 20px; /* Внутренний отступ */
+    box-shadow: 0 4px 6px rgb(176, 115, 0); /* Тень для карточки */
+    text-align: center; /* Центрирование текста */
+    transition: transform 0.3s ease; /* Плавный эффект при наведении */
+}
+
+.film-card:hover {
+    transform: scale(1.05); /* Увеличение карточки при наведении */
+}
+
+.film-card h2 {
+    font-size: 1.2rem; /* Размер заголовка */
+    margin-bottom: 10px; /* Отступ снизу */
+    color: #1D1D1D; /* Цвет текста */
+}
+
+.film-card p {
+    font-size: 1rem; /* Размер текста */
+    margin: 5px 0; /* Отступы сверху и снизу */
+    color: #333; /* Цвет текста */
+}
+
+.film-card .director {
+    font-weight: bold; /* Жирный текст для стоимости */
+    color: #4A6382; /* Цвет текста стоимости */
 }
 
 /* Стили для карточки с лозунгом */
@@ -48,6 +70,7 @@ h1 {
     font-family: 'Lato', sans-serif;
     font-size: 1.5em;
     font-weight: bold;
+    box-shadow: 0px 0px 16px 16px rgba(237, 200, 122, 0.22); /* Тень для карточки */
     margin: 20px auto; /* Отступ сверху 20px и центрирование по горизонтали */
     width: 80%; /* Устанавливаем ширину для центрирования */
     margin-bottom: 20px; /* Отступ от карточек фильмов */
