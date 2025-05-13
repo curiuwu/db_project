@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 from app.db import get_db_connetction
+from services import get_genres
 
 all_films_bp = Blueprint('all_films', __name__)
 
@@ -74,11 +75,3 @@ def all_films():
 
     return render_template('all_films.html', films=films_data, genres=genres)
 
-def get_genres():
-    conn = get_db_connetction()
-    cur = conn.cursor()
-    cur.execute("""select *
-                from genres
-                """)
-    genres = cur.fetchall()
-    return genres
