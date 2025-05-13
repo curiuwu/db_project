@@ -7,9 +7,12 @@ body {
 
 .films-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* фиксируем 4 колонки */
     gap: 20px;
     padding: 20px;
+    justify-items: center; /* Центрируем карточки в колонках */
+    max-width: 1300px;     /* Ограничиваем ширину контейнера */
+    margin: 0 auto;        /* Центрируем контейнер */
 }
 
 .film-card {
@@ -17,7 +20,8 @@ body {
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background: white;
+    background-color: #E3C39D;            /* Светлый фон карточки */
+    box-shadow: 0 4px 6px rgb(176, 115, 0);
 }
 
 .film-card h2 {
@@ -54,11 +58,19 @@ body {
 
 .filter-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Центрируем фильтр */
     align-items: center;
     padding: 20px;
     border-radius: 30px;
     margin-bottom: 20px;
+    width: 100%;
+}
+
+.filter-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
 }
 
 .date-filter {
