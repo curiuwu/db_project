@@ -17,7 +17,7 @@
 
         <!-- Форма фильтрации -->
         <div class="filter-container">
-            <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form", name="genre">
+            <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form">
               <label for="genre">Жанр:</label>
               <select name="genre" id="genre">
                 <option value="">Все жанры</option>
@@ -37,7 +37,7 @@
         <div class="films-container">
             {% for film in films %}
             <div class="film-card">
-                <h2><a href="{{ url_for('film_card.film_card', title=film[0]) }}">{{ film.title }}</a></h2>
+                <h2><a href="{{ url_for('film_card.film_card', title=film.title) }}">{{ film.title }}</a></h2>
                 <p>{{ film.description }}</p>
                 <p class="director">Режиссер: {{ film.director }}</p>
             </div>
