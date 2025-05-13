@@ -22,7 +22,7 @@ h1 {
 /* Сетка карточек фильмов */
 .films-container {
     display: grid; /* Используем CSS Grid для размещения карточек */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Автоматическая подстройка колонок */
+    grid-template-columns:  repeat(4, 1fr); 
     gap: 20px; /* Расстояние между карточками */
     padding: 20px; /* Внутренний отступ */
 }

@@ -4,6 +4,7 @@ from datetime import datetime
 
 booking_bp = Blueprint("booking", __name__)
 
+#TODO Разобраться с кодом и переписать модуль с работающей БД
 @booking_bp.route("/booking/confirme")
 def confirme_booking():
     if "user_id" not in session:

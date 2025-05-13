@@ -3,9 +3,11 @@ from app.db import get_db_connetction
 
 all_films_bp = Blueprint('all_films', __name__)
 
+#TODO сделать перключение по дням
 @all_films_bp.route('/all_films')
 def all_films():
-    genre = request.form.get('genre')  # Get the genre filter from the query parameters
+    genre = request.args.get('genre')  
+    date = request.args.get('date')
 
     connection = get_db_connetction()
     cur = connection.cursor()
@@ -26,12 +28,12 @@ def all_films():
 
     # Add filter for genre if provided
     if genre:
-        conditions.append("genres.genre_name = %s")
+        conditions.append("film_genre.genre_id = %s")
         params.append(genre)
 
     # Combine base query with conditions
     if conditions:
-        query = f"{base_query} WHERE " + " AND ".join(conditions)
+        query = f"{base_query} WHERE " + "".join(conditions)
     else:
         query = base_query
 
@@ -68,6 +70,15 @@ def all_films():
     cur.close()
     connection.close()
 
-    # Render the template with the filtered films
-    return render_template('all_films.html', films=films_data)
+    genres = get_genres()
 
+    return render_template('all_films.html', films=films_data, genres=genres)
+
+def get_genres():
+    conn = get_db_connetction()
+    cur = conn.cursor()
+    cur.execute("""select *
+                from genres
+                """)
+    genres = cur.fetchall()
+    return genres
