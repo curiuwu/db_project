@@ -28,22 +28,29 @@
                 </div>
             </div>
 
-            <div class="filter-card">
-                <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form" name="genre">
-                  <select name="genre" id="genre">
-                    <option value="">Выбор жанра</option>
-                    <option value="комедия">Комедия</option>
-                    <option value="драма">Драма</option>
-                    <option value="триллер">Триллер</option>
-                  </select>
-                </form>
-            </div>
+        <!-- Форма фильтрации -->
+        <div class="filter-container">
+            <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form">
+              <label for="genre">Жанр:</label>
+              <select name="genre" id="genre">
+                <option value="">Все жанры</option>
+                <option value="комедия">Комедия</option>
+                <option value="драма">Драма</option>
+                <option value="триллер">Триллер</option>
+                <!-- Добавьте нужные жанры -->
+              </select>
+
+              <label for="year">Год выпуска:</label>
+              <input type="number" name="year" id="year" placeholder="Например, 2020">
+
+              <button type="submit">Применить фильтры</button>
+            </form>
         </div>
 
         <div class="films-container">
             {% for film in films %}
             <div class="film-card">
-                <h2><a href="{{ url_for('film_card.film_card', title=film[0]) }}">{{ film.title }}</a></h2>
+                <h2><a href="{{ url_for('film_card.film_card', title=film.title) }}">{{ film.title }}</a></h2>
                 <p>{{ film.description }}</p>
                 <p class="director">Режиссер: {{ film.director }}</p>
             </div>

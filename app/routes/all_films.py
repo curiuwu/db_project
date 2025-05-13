@@ -7,7 +7,7 @@ all_films_bp = Blueprint('all_films', __name__)
 
 @all_films_bp.route('/all_films')
 def all_films():
-    genre = request.args.get('genre')
+    genre = request.form.get('genre')  # Get the genre filter from the query parameters
 
     connection = get_db_connetction()
     cur = connection.cursor()
