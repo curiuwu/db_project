@@ -3,17 +3,32 @@
 <head>
     <meta charset="utf-8">
     <title>Все фильмы</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/all_films.css') }}">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Все фильмы</h1>
-            <nav>
-                <a href="{{ url_for('main.main_page') }}" class="main-page-link">Главная страница</a>
-                <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link">Личный кабинет</a>
-            </nav>
+    <header class="header">
+        <div class="button-wrapper">
+            <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
+            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
         </div>
+    </header>
+    <div class="container">
+        <div class="date-filter">
+            <div class="date-card">
+                <button class="month-nav">&#9664;</button>
+                <span class="current-month">Май 2025</span>
+                <button class="month-nav">&#9654;</button>
+                <div class="week-buttons">
+                    <button class="day-button">1<br>Пн</button>
+                    <button class="day-button">2<br>Вт</button>
+                    <button class="day-button">3<br>Ср</button>
+                    <button class="day-button">4<br>Чт</button>
+                    <button class="day-button">5<br>Пт</button>
+                    <button class="day-button">6<br>Сб</button>
+                    <button class="day-button">7<br>Вс</button>
+                </div>
+            </div>
 
         <!-- Форма фильтрации -->
         <div class="filter-container">
@@ -44,5 +59,17 @@
             {% endfor %}
         </div>
     </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.day-button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                buttons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    });
+</script>
 </body>
 </html>

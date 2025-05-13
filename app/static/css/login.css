@@ -1,3 +1,9 @@
+.container {
+    max-width: 500px;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 0px;
+}
 /* Секция с заголовком */
 .card-title-section {
     border: 3px solid #ffddb4;          /* Жирная рамка бежевого цвета */
@@ -44,6 +50,7 @@
     border-radius: 30px;                /* Сильно скругленные углы */
     cursor: pointer;                    /* Курсор-указатель */
     transition: background 0.2s;        /* Плавное изменение фона */
+    box-shadow: 0px 0px 16px 16px rgba(237, 200, 122, 0.22);
 }
 
 /* Отключенная кнопка входа */

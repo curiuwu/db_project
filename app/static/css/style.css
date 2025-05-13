@@ -4,12 +4,18 @@ body {
     font-family: 'Lato', sans-serif;      /* Основной шрифт */
     background-color: #1D1D1D;            /* Тёмный фон по умолчанию */
     min-height: 100vh;                    /* Минимальная высота на весь экран */
-    display: flex;
+    display: flex; /* Устанавливаем нормальный поток документа */
     align-items: center;
     justify-content: center;
     margin: 0;
+    padding: 0;
 }
-
+.container {
+    max-width: 1000px;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 0px;
+}
 /* Стили для всех заголовков */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', sans-serif;      /* Шрифт Lato */
@@ -22,22 +28,26 @@ a {
     color:#4A6382;
 }
 
-/* Контейнер для центрирования и ограничения ширины контента */
-.container {
-    max-width: 500px;
-    width: 100%;
-    padding: 0;
-    padding-bottom: 0px;
-}
-
 /* Стили для шапки сайта */
 .header {
+    background-color: #191919;            /* Тёмный фон */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
     text-align: center;                   /* Центрируем текст */
-    margin-bottom: 20px;                  /* Отступ снизу */
     display: flex;                        /* Гибкое расположение элементов */
-    justify-content: space-between;       /* Элементы по краям */
+    justify-content: end;      /* Элементы справа */
     align-items: center;                  /* Выравнивание по центру по вертикали */
-    padding: 20px;                        /* Внутренний отступ */
+    padding: 20px;                        /* Уменьшаем внутренний отступ для уменьшения пространства под header */                      
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(74, 99, 130, 0.5); /* Add subtle shadow */
+    margin-bottom: 0; /* Убираем отступ снизу */
+    z-index: 9999; /* Устанавливаем высокий z-index, чтобы header был выше всего остального */
+}
+
+.header a {
+    margin-left: 20px; /* Добавляем расстояние между кнопками */
 }
 
 /* Стили для футера */
@@ -59,16 +69,21 @@ a {
     padding: 20px;                        /* Внутренний отступ */
     margin: 20px;                       /* Вертикальные отступы */
     transform: scale(1.5);
+    box-shadow: 0px 0px 16px 16px rgba(237, 200, 122, 0.22);
 }
 
+/* Стили для карточки с лозунгом */
+.slogan-card {
+    margin-top: 20px; /* Добавляем отступ сверху для точного позиционирования */
+}
 
 /* Общий стиль для кнопок */
-.button, button {
-    background-color: #2a3d6e;            /* Синий фон */
+.button{
+    background-color: #4A6382;            /* Синий фон */
     color: white;                         /* Белый текст */
     font-family: 'Lato', sans-serif;      /* Шрифт Lato */
     border: none;                         /* Без рамки */
-    border-radius: 5px;                   /* Скругление углов */
+    border-radius: 30px;                   /* Скругление углов */
     padding: 10px 20px;                   /* Внутренний отступ */
     cursor: pointer;                      /* Курсор-рука */
     transition: background-color 0.3s ease; /* Плавное изменение цвета */
@@ -96,64 +111,13 @@ input::placeholder, textarea::placeholder {
     color: rgba(255, 255, 255, 0.7);      /* Полупрозрачный белый */
 }
 
-/* Стили для выбора даты */
-.date-picker {
-    display: flex;                        
-    justify-content: center;              
-    margin-bottom: 20px;                  
-}
 
 /* Стили для постера фильма */
 .movie-poster {
     text-align: center;                   
     margin-bottom: 20px;                  
 }
-
-/* Стили для выбора мест */
-.seat-selection {
-    display: flex;                        
-    flex-direction: column;               
-    align-items: center;                  
-    margin-bottom: 20px;                  
-}
-
-/* Стили для списка билетов */
-.ticket-list {
-    margin-bottom: 20px;                  
-    border: 1px solid #000000;            
-    padding: 10px;                        
-    border-radius: 5px;                   
-}
-
-/* Стили для кнопки оплаты */
-.pay-button {
-    display: flex;                        
-    text-align: center;                   
-    margin-top: 20px;                     
-}
-
-/* Стили для бренда (логотипа) */
-.brand {
-    display: flex;                        
-    align-items: center;                  
-    gap: 20px;                            
-}
-
-.brand img {
-    max-height: 50px;                     
-    width: auto;                          
-}
-
-/* Стили для ссылки на личный кабинет */
-.personal-account {
-    padding: 10px 20px;                   
-    background-color: #007bff;            
-    color: white;                         
-    text-decoration: none;                 
-    border-radius: 5px;                   
-}
-
-/* Эффект наведения для ссылки на личный кабинет */
-.personal-account:hover {
-    background-color: #0056b3;            
+/* Стили для обертки кнопок */
+.button-wrapper {
+    transform: translateX(-50%); /* Центрируем относительно правого края */
 }
