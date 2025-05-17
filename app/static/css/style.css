@@ -3,18 +3,13 @@ body {
     color: white; 
     font-family: 'Lato', sans-serif;      /* Основной шрифт */
     background-color: #1D1D1D;            /* Тёмный фон по умолчанию */
-    min-height: 100vh;                    /* Минимальная высота на весь экран */
-    display: flex; /* Устанавливаем нормальный поток документа */
-    align-items: center;
-    justify-content: center;
     margin: 0;
     padding: 0;
 }
 .container {
-    max-width: 1000px;
-    width: 100%;
-    padding: 0;
-    padding-bottom: 0px;
+    max-width: 1200px;
+    margin: 100px auto 0 auto; /* отступ сверху для header */
+    padding: 0 20px;
 }
 /* Стили для всех заголовков */
 h1, h2, h3, h4, h5, h6 {
@@ -30,26 +25,33 @@ a {
 
 /* Стили для шапки сайта */
 .header {
-    background-color: #191919;            /* Тёмный фон */
+    background-color: #1D1D1D;            /* Тёмный фон */
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
-    text-align: center;                   /* Центрируем текст */
     display: flex;                        /* Гибкое расположение элементов */
-    justify-content: end;      /* Элементы справа */
+    justify-content: space-between;      /* Логотип слева, кнопки справа */
     align-items: center;                  /* Выравнивание по центру по вертикали */
-    padding: 20px;                        /* Уменьшаем внутренний отступ для уменьшения пространства под header */                      
-    align-items: center;
+    padding: 20px 100px 20px 40px;        /* Больше отступ справа, меньше слева */                      
     box-shadow: 0 2px 5px rgba(74, 99, 130, 0.5); /* Add subtle shadow */
     margin-bottom: 0; /* Убираем отступ снизу */
     z-index: 9999; /* Устанавливаем высокий z-index, чтобы header был выше всего остального */
+}
+
+.button-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .header a {
     margin-left: 20px; /* Добавляем расстояние между кнопками */
 }
 
+.logo {
+    height: 50px;
+    margin-left: 150px;
+}
 /* Стили для футера */
 .footer {
     background-color: #0F0F0F;            /* Тёмный фон */
@@ -69,14 +71,8 @@ a {
     padding: 20px;                        /* Внутренний отступ */
     margin: 20px;                       /* Вертикальные отступы */
     transform: scale(1.5);
-    box-shadow: 0px 0px 16px 16px rgba(237, 200, 122, 0.22);
+    box-shadow: 0 4px 6px rgb(176, 115, 0); /* Тень для карточки */
 }
-
-/* Стили для карточки с лозунгом */
-.slogan-card {
-    margin-top: 20px; /* Добавляем отступ сверху для точного позиционирования */
-}
-
 /* Общий стиль для кнопок */
 .button{
     background-color: #4A6382;            /* Синий фон */
@@ -120,4 +116,42 @@ input::placeholder, textarea::placeholder {
 /* Стили для обертки кнопок */
 .button-wrapper {
     transform: translateX(-50%); /* Центрируем относительно правого края */
+    display: flex;
+    align-items: center;
+}
+
+
+/* Стили для карточек фильмов */
+.film-card {
+    background-color: #E3C39D; /* Светлый фон карточки */
+    border-radius: 30px; /* Скругление углов */
+    padding: 20px; /* Внутренний отступ */
+    box-shadow: 0 4px 6px rgb(176, 115, 0); /* Тень для карточки */
+    text-align: center; /* Центрирование текста */
+    transition: transform 0.3s ease; /* Плавный эффект при наведении */
+}
+.film-card h2 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.film-card p {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.film-card .director {
+    color: #888;
+    font-style: italic;
+}
+
+.film-card .genre {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
 }

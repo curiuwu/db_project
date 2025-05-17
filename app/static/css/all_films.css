@@ -1,9 +1,10 @@
-body {
-    display: block;
-    flex-direction: column;
-    align-items: center;
-    margin: 80px;
-}
+/*
+all_films.css — стили для страницы со всеми фильмами:
+- .films-container: сетка карточек фильмов, 4 колонки, центрирование, отступы.
+- .filter-container, .filter-form: стили для фильтрации по жанру и дате.
+- .date-filter, .date-card, .day-button: оформление фильтра по датам.
+- .main-page-link, .personal-account-link: жирный текст для ссылок в header.
+*/
 
 .films-container {
     display: grid;
@@ -14,56 +15,12 @@ body {
     max-width: 1300px;     /* Ограничиваем ширину контейнера */
     margin: 0 auto;        /* Центрируем контейнер */
 }
-
-.film-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background-color: #E3C39D;            /* Светлый фон карточки */
-    box-shadow: 0 4px 6px rgb(176, 115, 0);
-}
-
-.film-card h2 {
-    color: #333;
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.5em;
-}
-
-.film-card p {
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 10px;
-}
-
-.film-card .director {
-    color: #888;
-    font-style: italic;
-}
-
-.film-card .genre {
-    display: inline-block;
-    background: #f0f0f0;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.9em;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
 .filter-container {
-    display: flex;
+    display: grid; /* Используем CSS Grid для размещения карточек */
     justify-content: center; /* Центрируем фильтр */
-    align-items: center;
-    padding: 20px;
-    border-radius: 30px;
-    margin-bottom: 20px;
-    width: 100%;
+    grid-template-columns:  repeat(3, 1fr); 
+    gap: 20px; /* Расстояние между карточками */
+    padding: 20px; /* Внутренний отступ */
 }
 
 .filter-form {
@@ -160,14 +117,4 @@ body {
 
 .main-page-link, .personal-account-link {
     font-weight: bold; /* Делаем текст жирным для ссылок в header */
-}
-
-.filter-card {
-    display: flex; /* Располагаем элементы в строку */
-    flex-direction: row-reverse; /* Устанавливаем направление строки */
-    justify-content: flex-end; /* Выравниваем элементы слева направо */
-    align-items: center; /* Выравниваем элементы по центру по вертикали */
-    gap: 15px; /* Добавляем расстояние между элементами */
-    margin-top: 10px; /* Отступ сверху для размещения под кнопками из header */
-    padding: 10px; /* Внутренний отступ для контейнера */
 }
