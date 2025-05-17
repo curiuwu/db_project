@@ -8,6 +8,7 @@
 </head>
 <body>
     <header class="header">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
         <div class="button-wrapper">
             <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
             <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
@@ -19,15 +20,18 @@
                 <button class="month-nav">&#9664;</button>
                 <span class="current-month">Май 2025</span>
                 <button class="month-nav">&#9654;</button>
-                <div class="week-buttons">
-                    <button class="day-button">1<br>Пн</button>
-                    <button class="day-button">2<br>Вт</button>
-                    <button class="day-button">3<br>Ср</button>
-                    <button class="day-button">4<br>Чт</button>
-                    <button class="day-button">5<br>Пт</button>
-                    <button class="day-button">6<br>Сб</button>
-                    <button class="day-button">7<br>Вс</button>
-                </div>
+                <form id="date-form" action="{{ url_for('all_films.all_films') }}" method="get" style="margin:0;">
+                    <input type="hidden" name="date" id="selected-date">
+                    <div class="week-buttons">
+                        <button type="button" class="day-button" data-date="2025-05-01">1<br>Пн</button>
+                        <button type="button" class="day-button" data-date="2025-05-02">2<br>Вт</button>
+                        <button type="button" class="day-button" data-date="2025-05-03">3<br>Ср</button>
+                        <button type="button" class="day-button" data-date="2025-05-04">4<br>Чт</button>
+                        <button type="button" class="day-button" data-date="2025-05-05">5<br>Пт</button>
+                        <button type="button" class="day-button" data-date="2025-05-06">6<br>Сб</button>
+                        <button type="button" class="day-button" data-date="2025-05-07">7<br>Вс</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -37,16 +41,11 @@
               <label for="genre">Жанр:</label>
               <select name="genre" id="genre">
                 <option value="">Все жанры</option>
-                <option value="комедия">Комедия</option>
-                <option value="драма">Драма</option>
-                <option value="триллер">Триллер</option>
-                <!-- Добавьте нужные жанры -->
+                {% for genre in genres %}
+                <option value="{{ genre[0] }}">{{ genre[1] }}</option>
+                {% endfor %}
               </select>
-
-              <label for="year">Год выпуска:</label>
-              <input type="number" name="year" id="year" placeholder="Например, 2020">
-
-              <button type="submit">Применить фильтры</button>
+              <button type="submit" class="filter-button">Применить фильтр</button>
             </form>
         </div>
 
@@ -63,11 +62,15 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('.day-button');
+        const dateInput = document.getElementById('selected-date');
+        const dateForm = document.getElementById('date-form');
 
         buttons.forEach(button => {
             button.addEventListener('click', function() {
                 buttons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
+                dateInput.value = this.dataset.date;
+                dateForm.submit();
             });
         });
     });

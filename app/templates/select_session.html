@@ -26,27 +26,28 @@
         </div>
 
         <div class="seating-area">
-            {% set current_row = 0 %}
+            {% set rows = {} %}
             {% for seat in seats %}
-                {% if seat[1] != current_row %}
-                    {% if current_row != 0 %}
-                        </div>
-                    {% endif %}
-                    <div class="row">
-                    {% set current_row = seat[1] %}
-                    <span class="row-number">Ряд {{ current_row }}</span>
-                {% endif %}
-                
-                <button class="seat"
-                        data-seat-id="{{ seat[0] }}"
-                        {% if seat[3] %}disabled{% endif %}>
-                    {{ seat[2] }}
-                </button>
-
-                {% if loop.last %}
-                    </div>
-                {% endif %}
+                {% set _ = rows.setdefault(seat[1], []).append(seat) %}
             {% endfor %}
+            <table class="seats-table">
+                <tbody>
+                {% for row_num, row_seats in rows.items()|sort %}
+                    <tr>
+                        <td class="row-number">Ряд {{ row_num }}</td>
+                        {% for seat in row_seats %}
+                        <td>
+                            <button class="seat"
+                                    data-seat-id="{{ seat[0] }}"
+                                    {% if seat[3] %}disabled{% endif %}>
+                                {{ seat[2] }}
+                            </button>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
 
         <div class="legend">
@@ -74,37 +75,42 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const seats = document.querySelectorAll('.seat:not(.occupied)');
+            const seats = document.querySelectorAll('.seat:not(:disabled)');
             const selectedSeats = document.getElementById('selected-seats');
             const totalPrice = document.getElementById('total-price');
             const bookButton = document.getElementById('book-button');
             const pricePerSeat = parseInt(totalPrice.dataset.price);
-            let selectedSeatsCount = 0;
+
+            function getRowAndSeat(button) {
+                const td = button.parentElement;
+                const tr = td.parentElement;
+                // row number is in the first cell of the row
+                const rowNumber = tr.querySelector('.row-number').textContent.replace(/\D/g, '');
+                const seatNumber = button.textContent.trim();
+                return { row: rowNumber, seat: seatNumber };
+            }
+
+            function updateSelection() {
+                const selected = document.querySelectorAll('.seat.selected');
+                const selectedSeatsArray = Array.from(selected).map(btn => {
+                    const info = getRowAndSeat(btn);
+                    return `Ряд ${info.row}, Место ${info.seat}`;
+                });
+                selectedSeats.textContent = selectedSeatsArray.join('; ');
+                totalPrice.textContent = (selected.length * pricePerSeat).toString();
+                bookButton.disabled = selected.length === 0;
+            }
 
             seats.forEach(seat => {
-                seat.addEventListener('click', () => {
-                    seat.classList.toggle('selected');
-                    selectedSeatsCount = document.querySelectorAll('.seat.selected').length;
-                    
-                    // Update selected seats display
-                    const selectedSeatsArray = Array.from(document.querySelectorAll('.seat.selected'))
-                        .map(seat => `Ряд ${seat.parentElement.querySelector('.row-number').textContent.split(' ')[1]}, Место ${seat.textContent.trim()}`);
-                    
-                    selectedSeats.textContent = selectedSeatsArray.join('; ');
-                    
-                    // Update total price
-                    totalPrice.textContent = (selectedSeatsCount * pricePerSeat).toString();
-                    
-                    // Enable/disable book button
-                    bookButton.disabled = selectedSeatsCount === 0;
+                seat.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                    updateSelection();
                 });
             });
 
             bookButton.addEventListener('click', () => {
                 const selectedSeatIds = Array.from(document.querySelectorAll('.seat.selected'))
                     .map(seat => seat.dataset.seatId);
-                
-                // Redirect to booking confirmation page with selected seats
                 window.location.href = "{{ url_for('booking.confirme_booking') }}?seats=" + selectedSeatIds.join(',') + "&session_id={{ session_info[0] }}";
             });
         });

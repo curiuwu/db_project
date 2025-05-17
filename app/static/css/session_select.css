@@ -77,6 +77,9 @@ nav {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .row {
@@ -184,4 +187,28 @@ nav {
 .book-button:disabled {
     background-color: #95a5a6;
     cursor: not-allowed;
-} 
+}
+
+.seats-table {
+    border-collapse: separate;
+    border-spacing: 10px 10px;
+    margin: 0 auto;
+}
+
+.seats-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.seats-table .row-number {
+    font-weight: bold;
+    color: #666;
+    min-width: 70px;
+    background: none;
+    border: none;
+    text-align: right;
+    padding-right: 10px;
+}
