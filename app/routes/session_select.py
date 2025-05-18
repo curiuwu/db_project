@@ -1,5 +1,6 @@
 from flask import Blueprint, session, render_template, url_for, redirect, request
 from app.db import get_db_connetction
+from services import get_session_info_by_id, get_hall, get_seats
 
 select_bp = Blueprint("session_select", __name__)
 
@@ -12,25 +13,17 @@ def select_session(session_id):
     cur = connection.cursor()
     
     #Выбор информации о сеансе и фильме
-    cur.execute(""" select sessions.session_id, sessions.date, sessions.time, sessions.price, films.title, films.description 
-                    from sessions
-                    join films on sessions.film_id = films.film_id
-                    where sessions.session_id = %s""", (session_id,))
-    session_info = cur.fetchone()
+    session_info = get_session_info_by_id(session_id)
 
     if session_info is None:
         cur.close()
         connection.close()
         return 'Такого сеанса нет', 404
     
-    cur.execute("""select hall_id from sessions where session_id = %s""", (session_id,))
-    hall_id = cur.fetchone()
+    
+    hall_id = get_hall(session_id)
     #Выбор всех мест
-    cur.execute(""" select seat_id, row, seat_number
-                    from seats
-                    where hall_id = %s
-                    order by row, seat_number""", (hall_id,))
-    seats = cur.fetchall()
+    seats = get_seats(hall_id)
 
     cur.close()
     connection.close()

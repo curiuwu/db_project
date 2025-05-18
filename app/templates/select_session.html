@@ -3,74 +3,78 @@
 <head>
     <meta charset="utf-8">
     <title>Выбор мест</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/session_select.css') }}">
 </head>
 <body>
+    <header class="header">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
+            <div class="button-wrapper">
+                <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+                <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
+                <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
+            </div>
+        </header>
+        
     <div class="container">
-        <div class="header">
-            <nav>
-                <a href="{{ url_for('main.main_page') }}" class="nav-link">Главная страница</a>
-                <a href="{{ url_for('all_films.all_films') }}" class="nav-link">Все фильмы</a>
-                <a href="{{ url_for('user_cabinet.personal_account') }}" class="nav-link">Личный кабинет</a>
-            </nav>
-        </div>
+        <main class="center-content">
+            <div class="session-info">
+                <p class="date">Дата: {{ session_info[1].strftime('%d.%m.%Y') }}</p>
+                <p class="time">Время: {{ session_info[2].strftime('%H:%M') }}</p>
+                <p class="price">Цена: {{ session_info[3] }} ₽</p>
+            </div>
 
-        <div class="session-info">
-            <p class="date">Дата: {{ session_info[1].strftime('%d.%m.%Y') }}</p>
-            <p class="time">Время: {{ session_info[2].strftime('%H:%M') }}</p>
-            <p class="price">Цена: {{ session_info[3] }} ₽</p>
-        </div>
+            <div class="screen-container">
+                <div class="screen">ЭКРАН</div>
+            </div>
 
-        <div class="screen-container">
-            <div class="screen">ЭКРАН</div>
-        </div>
-
-        <div class="seating-area">
-            {% set rows = {} %}
-            {% for seat in seats %}
-                {% set _ = rows.setdefault(seat[1], []).append(seat) %}
-            {% endfor %}
-            <table class="seats-table">
-                <tbody>
-                {% for row_num, row_seats in rows.items()|sort %}
-                    <tr>
-                        <td class="row-number">Ряд {{ row_num }}</td>
-                        {% for seat in row_seats %}
-                        <td>
-                            <button class="seat"
-                                    data-seat-id="{{ seat[0] }}"
-                                    {% if seat[3] %}disabled{% endif %}>
-                                {{ seat[2] }}
-                            </button>
-                        </td>
-                        {% endfor %}
-                    </tr>
+            <div class="seating-area">
+                {% set rows = {} %}
+                {% for seat in seats %}
+                    {% set _ = rows.setdefault(seat[1], []).append(seat) %}
                 {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                <table class="seats-table">
+                    <tbody>
+                    {% for row_num, row_seats in rows.items()|sort %}
+                        <tr>
+                            <td class="row-number">Ряд {{ row_num }}</td>
+                            {% for seat in row_seats %}
+                            <td>
+                                <button class="seat"
+                                        data-seat-id="{{ seat[0] }}"
+                                        {% if seat[3] %}disabled{% endif %}>
+                                    {{ seat[2] }}
+                                </button>
+                            </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="legend">
-            <div class="legend-item">
-                <div class="seat-example"></div>
-                <span>Свободно</span>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="seat-example"></div>
+                    <span>Свободно</span>
+                </div>
+                <div class="legend-item">
+                    <div class="seat-example occupied"></div>
+                    <span>Занято</span>
+                </div>
+                <div class="legend-item">
+                    <div class="seat-example selected"></div>
+                    <span>Выбрано</span>
+                </div>
             </div>
-            <div class="legend-item">
-                <div class="seat-example occupied"></div>
-                <span>Занято</span>
-            </div>
-            <div class="legend-item">
-                <div class="seat-example selected"></div>
-                <span>Выбрано</span>
-            </div>
-        </div>
 
-        <div class="booking-summary">
-            <h3>Выбранные места:</h3>
-            <div id="selected-seats"></div>
-            <p>Итого: <span id="total-price" data-price="{{ session_info[3] }}">0</span> ₽</p>
-            <button id="book-button" class="book-button" disabled>Забронировать</button>
-        </div>
+            <div class="booking-summary">
+                <h3>Выбранные места:</h3>
+                <div id="selected-seats"></div>
+                <p>Итого: <span id="total-price" data-price="{{ session_info[3] }}">0</span> ₽</p>
+                <button id="book-button" class="book-button" disabled>Забронировать</button>
+            </div>
+        </main>
     </div>
 
     <script>
