@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}">
 </head>
 <body>
-    <div class="header">
-        <h1>Все фильмы</h1>
-        <nav>
-            <a href="{{ url_for('main.main_page') }}" class="main-page-link">Главная страница</a>
-            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link">Личный кабинет</a>
-        </nav>
+    <header class="header">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
+        <div class="button-wrapper">
+            <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
+            <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
+        </div>
+    </header>
+    <div class="container">
+        <p>При дальнейшем развитии проекта будет добален платёжный сервис, на данный момент мы его не сделали</p>
+        <p>Вы можете оплатить билет в кассе кинотеатра</p>
+        <p>Спасибо за понимание</p>
     </div>
-    <p>При дальнейшем развитии проекта будет добален платёжный сервис, на данный момент мы его не сделали</p>
-    <p>Вы можете оплатить билет в кассе кинотеатра</p>
-    <p>Спасибо за понимание</p>
+    
 </body>
 </html>

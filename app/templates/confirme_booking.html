@@ -3,18 +3,19 @@
 <head>
     <meta charset="utf-8">
     <title>Подтверждение бронирования - {{ session_info[4] }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_confirme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/confirme_booking.css') }}">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Подтверждение бронирования</h1>
-            <nav>
-                <a href="{{ url_for('main.main_page') }}" class="nav-link">Главная страница</a>
-                <a href="{{ url_for('all_films.all_films') }}" class="nav-link">Все фильмы</a>
-                <a href="{{ url_for('user_cabinet.personal_account') }}" class="nav-link">Личный кабинет</a>
-            </nav>
+    <header class="header">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
+        <div class="button-wrapper">
+            <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
+            <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
         </div>
+    </header>
+    <div class="container">
 
         <div class="booking-details">
             <h2>{{ session_info[4] }}</h2>
