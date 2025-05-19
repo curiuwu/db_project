@@ -7,30 +7,64 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/film_card.css') }}">
 </head>
 <body>
-    <header class="header">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
-        <div class="button-wrapper">
-            <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
-            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
-            <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
-        </div>
-    </header>
-    <div class="container">
-        <h1>{{ film[0] }}</h1>
-        <p>{{ film[1] }}</p>
-        <p class="director">Дата {{film[2]}}</p>
-        <p class="director">Режисёр: {{director[0]}} {{director[1]}}</p>
-        <span class="genre">Жанр: {{ film[3] }}</span>
+    <div class="wrapper">
+        <main>
+            <header class="header">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
+                <div class="button-wrapper">
+                    <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+                    <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
+                    <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
+                </div>
+            </header>
+            <div class="container">
+                <div class="film-card">
+                    <div class="film-card-left">
+                        <img src="{{ url_for('static', filename='img/film_poster.png') }}" alt="Постер фильма" class="film-poster">
+                        <h1 class="film-card-title">{{ film[0] }}</h1>
+                    </div>
+                    <div class="film-card-right">
+                        <div class="film-card-description-title">Описание</div>
+                        <div class="film-card-description-text">
+                        <p>{{ film[1] }}</p>
+                        </div>
+                        <div class="film-card-info-block">
+                            <p>Дата {{film[2]}}</p>
+                            <p>Режисёр: {{director[0]}} {{director[1]}}</p>
+                            <p>Жанр: {{ film[3] }}</p>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="sessions">
-            <h2>Сеансы</h2>
-            {% for session in sessions %}
-            <a class="session-button" href="{{ url_for('session_select.select_session', session_id = session[0]) }}">
-                <p>{{ session[1] }} - {{ session[2] }} руб.</p>
-            </a>
-            {% endfor %}
-        </div>
+                <div class="sessions">
+                    {% for session in sessions %}
+                    <a class="session-button" href="{{ url_for('session_select.select_session', session_id = session[0]) }}">
+                        <p>{{ session[1] }} - {{ session[2] }} руб.</p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-logo-title">Кинотеатр</div>
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="footer-logo-img">
+                </div>
+                <div class="footer-contacts">
+                    <h3>Контакты</h3>
+                    <div>Телефон: +7 (999) 123-45-67</div>
+                    <div>Email: info@cinema.ru</div>
+                    <div>Адрес: г. Москва, ул. Легендарная, 1</div>
+                </div>
+                <div class="footer-social">
+                    <h3>Социальные сети</h3>
+                    <span>VK</span>
+                    <span>Telegram</span>
+                    <span>Instagram</span>
+                </div>
+            </div>
+        </footer>
     </div>
-
 </body>
 </html>
