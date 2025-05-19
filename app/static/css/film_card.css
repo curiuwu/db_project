@@ -42,7 +42,9 @@
     justify-content: center;
     gap: 20px;
     text-align: center;
+    min-width: 0;
 }
+
 .film-card-left {
     display: flex;
     flex-direction: column;
@@ -59,30 +61,36 @@
 
 .film-poster {
     width: 220px;
-    height: auto;
+    height: 320px;
     border-radius: 30px;
+    background: #4A6382;
+    border: 4px solid #E3C39D;
     box-shadow: 0 2px 8px rgba(74, 99, 130, 0.2);
-    margin-bottom: 60px; /* место для названия */
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    object-fit: cover;
 }
 
 .film-card-title {
     border: 3px solid #ffddb4;
     border-radius: 30px;
     padding: 12px 24px;
-    color: #ffffff;
+    color: #fff;
     font-size: 1.3em;
     font-weight: bold;
-    background: transparent;
-    margin: 0;
-    position: absolute;
-    left: 50%;
-    bottom: 20px;
-    transform: translateX(-50%);
-    width: max-content;
-    max-width: 90%;
+    background: #4A6382;
+    margin: 0 0 0 0;
+    position: static;
+    width: 100%;
     text-align: center;
     box-sizing: border-box;
     z-index: 2;
+    align-self: flex-end;
 }
 
 .film-card-description-title {
@@ -103,7 +111,7 @@
     text-align: center;
 }
 
-.film-card-description-text {
+.film-card-info-box {
     border: 3px solid #ffddb4;
     border-radius: 30px;
     padding: 18px 24px;
@@ -116,33 +124,26 @@
     font-style: italic;
     box-sizing: border-box;
     margin-top: 0;
-    /* Совпадает с .film-card-description-title */
+    transition: background 0.2s, border-color 0.2s;
+    width: 100%;
+    max-width: 370px;
 }
-
-.film-card-description-text p {
-    color: #4A6382;
-    font-weight: bold;
-}
-
-.film-card-info-block {
-    border: 3px solid #ffddb4;
-    border-radius: 30px;
-    padding: 18px 24px;
-    margin-top: 18px;
-    color: #4A6382;
-    font-size: 1.1em;
-    line-height: 1.6;
-    text-align: left;
-    font-style: italic;
-    box-sizing: border-box;
-}
-.film-card-info-block p {
+.film-card-info-box p {
     margin: 0 0 8px 0;
     color: #4A6382;
     font-style: italic;
+    font-weight: bold;
 }
-.film-card-info-block p:last-child {
+.film-card-info-box p:last-child {
     margin-bottom: 0;
+}
+.film-card-info-box:hover {
+    background: #4A6382;
+    border-color: #4A6382;
+    color: #fff;
+}
+.film-card-info-box:hover p {
+    color: #fff;
 }
 
 .sessions {
