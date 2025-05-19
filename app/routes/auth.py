@@ -2,8 +2,8 @@ from flask import Blueprint, redirect, render_template, flash, url_for, request,
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.db import get_db_connetction
 from urllib.parse import urlparse, urljoin
-auth_bp = Blueprint('auth', __name__)
 
+auth_bp = Blueprint('auth', __name__)
 
 
 def is_safe_url(target):
@@ -35,11 +35,10 @@ def register():
         cur.execute('SELECT user_id FROM users where first_name = %s AND second_name = %s', (first_name, second_name,))
 
         if cur.fetchone():
-             flash('Такой пользователь уже существует')
-             cur.close()
-             connection.close()
-             return redirect(url_for('auth.register'))
-        
+            flash('Такой пользователь уже существует')
+            cur.close()
+            connection.close()
+            return redirect(url_for('auth.register'))
 
         cur.execute("""INSERT INTO users (first_name, second_name, age, email, hashed_password)
                      VALUES(%s, %s, %s, %s, %s)""", (first_name, second_name, age, email, hashed_password))
@@ -56,11 +55,11 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-    
+
         if not email or not password:
             flash('Введите данные во все поля')
             return redirect(url_for('auth.login', next=next_url))
-        
+
         connection = get_db_connetction()
         cur = connection.cursor()
         cur.execute("SELECT user_id, hashed_password FROM users WHERE email = %s", (email,))
@@ -75,12 +74,13 @@ def login():
             # Редирект на next_url, если он безопасен
             if next_url and is_safe_url(next_url):
                 return redirect(next_url)
-            return redirect(url_for('main.main_page'))   
+            return redirect(url_for('main.main_page'))
         else:
             flash('Неверное имя пользователя или пароль')
             return redirect(url_for('auth.login', next=next_url))
-    
+
     return render_template('login.html', next=next_url)
+
 
 @auth_bp.route('/logout')
 def logout():
