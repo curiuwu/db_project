@@ -4,11 +4,11 @@ from services import get_genres
 
 all_films_bp = Blueprint('all_films', __name__)
 
-#TODO сделать перключение по дням
+
 @all_films_bp.route('/all_films')
 def all_films():
     genre = request.args.get('genre')  
-    date = request.args.get('date')
+
 
     connection = get_db_connetction()
     cur = connection.cursor()
@@ -27,34 +27,29 @@ def all_films():
     conditions = []
     params = []
 
-    # Add filter for genre if provided
     if genre:
         conditions.append("film_genre.genre_id = %s")
         params.append(genre)
 
-    # Combine base query with conditions
+
     if conditions:
         query = f"{base_query} WHERE " + "".join(conditions)
     else:
         query = base_query
 
-    # Execute the query
     cur.execute(query, tuple(params))
     films = cur.fetchall()
 
-    # Fetch directors for all films
     cur.execute("""SELECT films.film_id, directors.first_name, directors.second_name
                    FROM films
                    JOIN directors ON films.director_id = directors.director_id""")
     director = cur.fetchall()
 
-    # Map directors to their respective films
+
     director_map = {
         film_id: f"{first_name} {second_name}"
         for film_id, first_name, second_name in director
     }
-
-    # Prepare the films data for rendering
     films_data = []
     for film in films:
         film_id, title, description, genre, release_date, poster_link = film
