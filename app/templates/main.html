@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- The lang="ru" attribute specifies that the content of this page is in Russian -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -13,7 +14,7 @@
             <div class="button-wrapper">
                 <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
                 <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
-                <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
+                <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
             </div>
         </header>
         <main>
@@ -23,15 +24,19 @@
                 </div>
 
                 <div class="films-container">
-                    {% for film in films %}
-                    <a href="{{ url_for('film_card.film_card', title=film[0]) }}" class="film-card-link">
-                        <div class="film-card">
-                            <h2>{{ film[0] }}</h2>
-                            <p>{{ film[1] }}</p>
-                            <p class="director">Стоимость: {{ film[2] }}</p>
-                        </div>
-                    </a>
-                    {% endfor %}
+                    {% if films %}
+                        {% for film in films %}
+                        <a href="{{ url_for('film_card.film_card', title=film[0]) }}" class="film-card-link">
+                            <div class="film-card">
+                                <h2>{{ film[0] }}</h2>
+                                <p>{{ film[1] }}</p>
+                                <p class="director">Стоимость: {{ film[2] }}</p>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    {% else %}
+                        <p>Фильмы не найдены.</p>
+                    {% endif %}
                 </div>
             </div>
         </main>
@@ -49,9 +54,9 @@
                 </div>
                 <div class="footer-social">
                     <h3>Социальные сети</h3>
-                    <span>VK</span>
-                    <span>Telegram</span>
-                    <span>Instagram</span>
+                    <a href="https://vk.com" target="_blank">VK</a>
+                    <a href="https://telegram.org" target="_blank">Telegram</a>
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
                 </div>
             </div>
         </footer>

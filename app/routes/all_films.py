@@ -8,8 +8,6 @@ all_films_bp = Blueprint('all_films', __name__)
 @all_films_bp.route('/all_films')
 def all_films():
     genre = request.args.get('genre')  
-
-
     connection = get_db_connetction()
     cur = connection.cursor()
 

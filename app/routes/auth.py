@@ -25,9 +25,25 @@ def register():
         password = request.form.get('password')
 
         if not first_name or not second_name or not age or not email or not password:
-            flash('Для регистрации необходимо ввести данные во все поля')
-            return redirect(url_for('auth.register'))
+            pass  # Removed unreachable code
 
+        # Validate email format
+        if '@' not in email or '.' not in email:
+            flash('Введите корректный адрес электронной почты')
+            return redirect(url_for('auth.register'))
+        cur.execute('SELECT user_id FROM users WHERE (first_name = %s AND second_name = %s) OR email = %s', (first_name, second_name, email,))
+        # Validate age as an integer
+        try:
+            age = int(age)
+            if age <= 0:
+                raise ValueError
+        except ValueError:
+            flash('Возраст должен быть положительным числом')
+            return redirect(url_for('auth.register'))
+            
+
+        # Ensure age is sanitized as an integer
+        age = int(age)
         hashed_password = generate_password_hash(password)
         connection = get_db_connetction()
         cur = connection.cursor()
