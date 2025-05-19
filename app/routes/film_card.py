@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
-from services import *
+from services import get_film, get_sessions, get_director
 
 film_card_bp = Blueprint('film_card', __name__)
 

@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, session, request, redirect, url_for, flash
 from psycopg2.extras import execute_values
 from app.db import get_db_connetction
-from datetime import datetime
 from services import get_session_info_by_id, get_user_id
 from datetime import date
 

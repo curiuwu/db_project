@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, session, request
-from app.db import get_db_connetction
+
 
 payment_bp = Blueprint('payment', __name__)
 
