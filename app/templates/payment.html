@@ -7,22 +7,43 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}">
 </head>
 <body>
-    <header class="header">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
-        <div class="button-wrapper">
-            <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
-            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
-            <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
+    <div class="wrapper">
+        <header class="header">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
+            <div class="button-wrapper">
+                <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+                <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
+                <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
+            </div>
+        </header>
+        <div class="container">
+            <div class="textContent">
+                <p>На данный момент опалата онлайн не доступна</p>
+                <p>Ваш билет забронирован</p>
+                <p>Вы можете оплатить билет в кассе кинотеатра</p>
+                <p>Спасибо за понимание</p>
+            </div>
         </div>
-    </header>
-    <div class="container">
-        <div class="textContent">
-            <p>На данный момент опалата онлайн не доступна</p>
-            <p>Ваш билет забронирован</p>
-            <p>Вы можете оплатить билет в кассе кинотеатра</p>
-            <p>Спасибо за понимание</p>
-        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-logo-title">Кинотеатр</div>
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="footer-logo-img">
+                </div>
+                <div class="footer-contacts">
+                    <h3>Контакты</h3>
+                    <div>Телефон: +7 (999) 123-45-67</div>
+                    <div>Email: info@cinema.ru</div>
+                    <div>Адрес: г. Москва, ул. Легендарная, 1</div>
+                </div>
+                <div class="footer-social">
+                    <h3>Социальные сети</h3>
+                    <span>VK</span>
+                    <span>Telegram</span>
+                    <span>Instagram</span>
+                </div>
+            </div>
+        </footer>
     </div>
-    
 </body>
 </html>

@@ -7,57 +7,81 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/all_films.css') }}">
 </head>
 <body>
-    <header class="header">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
-        <div class="button-wrapper">
-            <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
-            <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
-            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
-        </div>
-    </header>
-    <div class="container">
-
-        <!-- Форма фильтрации -->
-        <div class="filter-container">
-            <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form">
-              <label for="genre">Жанр:</label>
-              <select name="genre" id="genre">
-                <option value="">Все жанры</option>
-                {% for genre in genres %}
-                <option value="{{ genre[0] }}">{{ genre[1] }}</option>
-                {% endfor %}
-              </select>
-              <button type="submit" class="filter-button">Применить фильтр</button>
-            </form>
-        </div>
-
-        <div class="films-container">
-            {% for film in films %}
-            <a href="{{ url_for('film_card.film_card', title=film.title) }}" class="film-card-link">
-                <div class="film-card">
-                    <h2>{{ film.title }}</h2>
-                    <p>{{ film.description }}</p>
-                    <p class="director">Режиссер: {{ film.director }}</p>
+    <div class="wrapper">
+        <main>
+            <header class="header">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
+                <div class="button-wrapper">
+                    <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+                    <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
+                    <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
                 </div>
-            </a>
-            {% endfor %}
-        </div>
-    </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.day-button');
-        const dateInput = document.getElementById('selected-date');
-        const dateForm = document.getElementById('date-form');
+            </header>
+            <div class="container">
 
-        buttons.forEach(button => {
-            button.addEventListener('click', function() {
-                buttons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                dateInput.value = this.dataset.date;
-                dateForm.submit();
-            });
-        });
-    });
-</script>
+                <!-- Форма фильтрации -->
+                <div class="filter-container">
+                    <form action="{{ url_for('all_films.all_films') }}" method="get" class="filter-form">
+                      <label for="genre">Жанр:</label>
+                      <select name="genre" id="genre">
+                        <option value="">Все жанры</option>
+                        {% for genre in genres %}
+                        <option value="{{ genre[0] }}">{{ genre[1] }}</option>
+                        {% endfor %}
+                      </select>
+                      <button type="submit" class="filter-button">Применить фильтр</button>
+                    </form>
+                </div>
+
+                <div class="films-container">
+                    {% for film in films %}
+                    <a href="{{ url_for('film_card.film_card', title=film.title) }}" class="film-card-link">
+                        <div class="film-card">
+                            <h2>{{ film.title }}</h2>
+                            <p>{{ film.description }}</p>
+                            <p class="director">Режиссер: {{ film.director }}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const buttons = document.querySelectorAll('.day-button');
+                    const dateInput = document.getElementById('selected-date');
+                    const dateForm = document.getElementById('date-form');
+
+                    buttons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            buttons.forEach(btn => btn.classList.remove('active'));
+                            this.classList.add('active');
+                            dateInput.value = this.dataset.date;
+                            dateForm.submit();
+                        });
+                    });
+                });
+            </script>
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-logo-title">Кинотеатр</div>
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="footer-logo-img">
+                </div>
+                <div class="footer-contacts">
+                    <h3>Контакты</h3>
+                    <div>Телефон: +7 (999) 123-45-67</div>
+                    <div>Email: info@cinema.ru</div>
+                    <div>Адрес: г. Москва, ул. Легендарная, 1</div>
+                </div>
+                <div class="footer-social">
+                    <h3>Социальные сети</h3>
+                    <span>VK</span>
+                    <span>Telegram</span>
+                    <span>Instagram</span>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

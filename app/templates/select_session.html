@@ -7,118 +7,96 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/session_select.css') }}">
 </head>
 <body>
-    <header class="header">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
-            <div class="button-wrapper">
-                <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
-                <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
-                <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
-            </div>
-    </header>
-        
-    <div class="container">
-        <main class="center-content">
-            <div class="session-info">
-                <p class="date">Дата: {{ session_info[1].strftime('%d.%m.%Y') }}</p>
-                <p class="time">Время: {{ session_info[2].strftime('%H:%M') }}</p>
-                <p class="price">Цена: {{ session_info[3] }} ₽</p>
-            </div>
+    <div class="wrapper">
+        <header class="header">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
+                <div class="button-wrapper">
+                    <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+                    <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
+                    <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
+                </div>
+        </header>
+            
+        <div class="container">
+            <main class="center-content">
+                <div class="session-info">
+                    <p class="date">Дата: {{ session_info[1].strftime('%d.%m.%Y') }}</p>
+                    <p class="time">Время: {{ session_info[2].strftime('%H:%M') }}</p>
+                    <p class="price">Цена: {{ session_info[3] }} ₽</p>
+                </div>
 
-            <div class="screen-container">
-                <div class="screen">ЭКРАН</div>
-            </div>
+                <div class="screen-container">
+                    <div class="screen">ЭКРАН</div>
+                </div>
 
-            <div class="seating-area">
-                {% set rows = {} %}
-                {% for seat in seats %}
-                    {% set _ = rows.setdefault(seat[1], []).append(seat) %}
-                {% endfor %}
-                <table class="seats-table">
-                    <tbody>
-                    {% for row_num, row_seats in rows.items()|sort %}
-                        <tr>
-                            <td class="row-number">Ряд {{ row_num }}</td>
-                            {% for seat in row_seats %}
-                            <td>
-                                <button class="seat"
-                                        data-seat-id="{{ seat[0] }}"
-                                        {% if seat[3] %}disabled{% endif %}>
-                                    {{ seat[2] }}
-                                </button>
-                            </td>
-                            {% endfor %}
-                        </tr>
+                <div class="seating-area">
+                    {% set rows = {} %}
+                    {% for seat in seats %}
+                        {% set _ = rows.setdefault(seat[1], []).append(seat) %}
                     {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    <table class="seats-table">
+                        <tbody>
+                        {% for row_num, row_seats in rows.items()|sort %}
+                            <tr>
+                                <td class="row-number">Ряд {{ row_num }}</td>
+                                {% for seat in row_seats %}
+                                <td>
+                                    <button class="seat"
+                                            data-seat-id="{{ seat[0] }}"
+                                            {% if seat[3] %}disabled{% endif %}>
+                                        {{ seat[2] }}
+                                    </button>
+                                </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="seat-example"></div>
-                    <span>Свободно</span>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="seat-example"></div>
+                        <span>Свободно</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="seat-example occupied"></div>
+                        <span>Занято</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="seat-example selected"></div>
+                        <span>Выбрано</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <div class="seat-example occupied"></div>
-                    <span>Занято</span>
-                </div>
-                <div class="legend-item">
-                    <div class="seat-example selected"></div>
-                    <span>Выбрано</span>
-                </div>
-            </div>
 
-            <div class="booking-summary">
-                <h3>Выбранные места:</h3>
-                <div id="selected-seats"></div>
-                <p>Итого: <span id="total-price" data-price="{{ session_info[3] }}">0</span> ₽</p>
+                <div class="booking-summary">
+                    <h3>Выбранные места:</h3>
+                    <div id="selected-seats"></div>
+                    <p>Итого: <span id="total-price" data-price="{{ session_info[3] }}">0</span> ₽</p>
+                </div>
+                <button id="book-button" class="book-button" disabled>Забронировать</button>
+            </main>
+        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-logo-title">Кинотеатр</div>
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="footer-logo-img">
+                </div>
+                <div class="footer-contacts">
+                    <h3>Контакты</h3>
+                    <div>Телефон: +7 (999) 123-45-67</div>
+                    <div>Email: info@cinema.ru</div>
+                    <div>Адрес: г. Москва, ул. Легендарная, 1</div>
+                </div>
+                <div class="footer-social">
+                    <h3>Социальные сети</h3>
+                    <span>VK</span>
+                    <span>Telegram</span>
+                    <span>Instagram</span>
+                </div>
             </div>
-            <button id="book-button" class="book-button" disabled>Забронировать</button>
-        </main>
-        
+        </footer>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const seats = document.querySelectorAll('.seat:not(:disabled)');
-            const selectedSeats = document.getElementById('selected-seats');
-            const totalPrice = document.getElementById('total-price');
-            const bookButton = document.getElementById('book-button');
-            const pricePerSeat = parseInt(totalPrice.dataset.price);
-
-            function getRowAndSeat(button) {
-                const td = button.parentElement;
-                const tr = td.parentElement;
-                // row number is in the first cell of the row
-                const rowNumber = tr.querySelector('.row-number').textContent.replace(/\D/g, '');
-                const seatNumber = button.textContent.trim();
-                return { row: rowNumber, seat: seatNumber };
-            }
-
-            function updateSelection() {
-                const selected = document.querySelectorAll('.seat.selected');
-                const selectedSeatsArray = Array.from(selected).map(btn => {
-                    const info = getRowAndSeat(btn);
-                    return `Ряд ${info.row}, Место ${info.seat}`;
-                });
-                selectedSeats.textContent = selectedSeatsArray.join('; ');
-                totalPrice.textContent = (selected.length * pricePerSeat).toString();
-                bookButton.disabled = selected.length === 0;
-            }
-
-            seats.forEach(seat => {
-                seat.addEventListener('click', function() {
-                    this.classList.toggle('selected');
-                    updateSelection();
-                });
-            });
-
-            bookButton.addEventListener('click', () => {
-                const selectedSeatIds = Array.from(document.querySelectorAll('.seat.selected'))
-                    .map(seat => seat.dataset.seatId);
-                window.location.href = "{{ url_for('booking.confirme_booking') }}?seats=" + selectedSeatIds.join(',') + "&session_id={{ session_info[0] }}";
-            });
-        });
-    </script>
 </body>
 </html>

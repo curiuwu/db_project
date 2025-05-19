@@ -52,17 +52,6 @@ a {
     height: 50px;
     margin-left: 150px;
 }
-/* Стили для футера */
-.footer {
-    background-color: #0F0F0F;            /* Тёмный фон */
-    color: white;                         /* Белый текст */
-    font-family: 'Lato', sans-serif;      /* Шрифт Lato */
-    padding: 20px;                        /* Внутренний отступ */
-    text-align: center;                   /* Центрируем текст */
-    position: fixed;                      /* Фиксируем внизу */
-    bottom: 0;                            /* Прижимаем к низу */
-    width: 100%;                          /* На всю ширину */
-}
 
 /* Общий стиль для карточек */
 .card {
@@ -154,4 +143,107 @@ input::placeholder, textarea::placeholder {
     padding: 5px 10px;
     border-radius: 15px;
     font-size: 0.9em;
+}
+.footer {
+    background-color: #1D1D1D;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    padding: 20px 0;
+    text-align: center;
+    position: static;
+    left: unset;
+    bottom: unset;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(74, 99, 130, 0.2);
+}
+
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper main {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Центрируем по вертикали */
+    min-width: 140px;
+    height: 100%;
+}
+.footer-logo-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 8px;
+    margin-top: 0;
+    letter-spacing: 1px;
+    /* Убираем лишний отступ, чтобы выровнять с другими блоками */
+}
+.footer-logo-img {
+    height: 38px;
+    margin-bottom: 0;
+}
+
+.footer-contacts, .footer-social {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем по вертикали */
+    align-items: flex-start;
+    min-width: 200px;
+    text-align: left;
+    height: 100%;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start; /* Выровнять заголовки по верхнему краю */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    gap: 40px;
+}
+
+.footer-logo, .footer-contacts, .footer-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 140px;
+}
+
+.footer-logo-title, .footer-contacts h3, .footer-social h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 8px;
+    margin-top: 0;
+    letter-spacing: 1px;
+    /* Все заголовки футера на одном уровне */
+}
+
+.footer-logo-img {
+    height: 38px;
+    margin-bottom: 0;
+}
+
+.footer-contacts > div, .footer-social > span {
+    font-size: 0.98em;
+    color: #ccc;
+}
+
+.footer-contacts, .footer-social {
+    text-align: center;
+    min-width: 200px;
 }
