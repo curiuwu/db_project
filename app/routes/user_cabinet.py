@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, redirect, url_for, flash, request
-from services import *
+from services import get_user_info, get_user_id, get_ticket_info
 
 user_cabinet_bp = Blueprint('user_cabinet', __name__, template_folder='templates')
 
