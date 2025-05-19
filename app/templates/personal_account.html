@@ -20,53 +20,50 @@
             </header>
             
             <div class="container">
-                <div class="card">
-                    <!-- 1. Секция: Заголовок -->
-                    <div class="card-title-section">
-                        <h1>Личный кабинет</h1>
-                    </div
-                    
-                    <div class="account-content">
-                        <!-- Левый сегмент: Информация о пользователе -->
-                        <div class="user-info-section">
-                            <!-- 1. Секция: Имя, Фамилия, Возраст -->
-                            <div class="inputs-row">
-                                <input type="text" class="input" name="first_name" placeholder="Имя" value="{{ user[0] }}" readonly>
-                                <input type="text" class="input" name="second_name" placeholder="Фамилия" value="{{ user[1] }}" readonly>
-                                <input type="number" class="input" name="age" placeholder="Возраст" value="{{ user[2] }}" readonly>
-                            </div>
-                            
-                            <!-- 2. Секция: Логин (почта) -->
-                            <div class="input-section">
-                                <input type="email" class="input" name="email" placeholder="Почта" value="{{ user[3] }}">
-                            </div>
-                            
+                <div class="account-flex-row">
+                    <div class="card">
+                        <!-- 1. Секция: Заголовок -->
+                        <div class="card-title-section">
+                            <h1>Личный кабинет</h1>
                         </div>
-
-                        <!-- Правый сегмент: Билеты -->
-                        <div class="tickets-section">
-                            <div class="tickets-card">
-                                <h2>Мои билеты</h2>
-                                <div class="tickets-list">
-                                    {% for ticket in tickets %}
-                                    <div class="ticket-item">
-                                        <div class="ticket-info">
-                                            <p>Дата: {{ ticket[0] }}</p>
-                                            <p>Время: {{ ticket[1] }}</p>
-                                            <p>Место: {{ ticket[2] }}</p>
-                                        </div>
-                                        <button class="download-btn">
-                                            <img src="{{ url_for('static', filename='images/download-icon.svg') }}" alt="Скачать">
-                                        </button>
-                                    </div>
-                                    {% endfor %}
+                        <div class="account-content">
+                            <div class="user-info-section">
+                                <!-- 1. Секция: Имя, Фамилия, Возраст -->
+                                <div class="input-label">Имя</div>
+                                <input type="text" class="input" name="first_name" placeholder="Имя" value="{{ user[0] }}" readonly>
+                                <div class="input-label">Фамилия</div>
+                                <input type="text" class="input" name="second_name" placeholder="Фамилия" value="{{ user[1] }}" readonly>
+                                
+                                <!-- 2. Секция: Логин (почта) -->
+                                <div class="input-label">Почта</div>
+                                <div class="input-section">
+                                    <input type="email" class="input" name="email" placeholder="Почта" value="{{ user[3] }}">
                                 </div>
                             </div>
                         </div>
+                        <div class="logout-section">
+                            <a href="{{ url_for('auth.logout') }}" class="logout-btn">Выйти</a>
+                        </div>
                     </div>
-
-                    <div class="logout-section">
-                        <a href="{{ url_for('auth.logout') }}" class="logout-btn">Выйти</a>
+                    <!-- Блок билетов справа -->
+                    <div class="tickets-section">
+                        <div class="tickets-card">
+                            <h2>Мои билеты</h2>
+                            <div class="tickets-list">
+                                {% for ticket in tickets %}
+                                <div class="ticket-item">
+                                    <div class="ticket-info">
+                                        <p>Дата: {{ ticket[0] }}</p>
+                                        <p>Время: {{ ticket[1] }}</p>
+                                        <p>Место: {{ ticket[2] }}</p>
+                                    </div>
+                                    <button class="download-btn">
+                                        <img src="{{ url_for('static', filename='images/download-icon.svg') }}" alt="Скачать">
+                                    </button>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

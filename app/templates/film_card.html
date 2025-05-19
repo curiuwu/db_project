@@ -20,15 +20,15 @@
             <div class="container">
                 <div class="film-card">
                     <div class="film-card-left">
-                        <img src="{{ url_for('static', filename='img/film_poster.png') }}" alt="Постер фильма" class="film-poster">
+                        <div class="film-poster"></div>
                         <h1 class="film-card-title">{{ film[0] }}</h1>
                     </div>
                     <div class="film-card-right">
                         <div class="film-card-description-title">Описание</div>
-                        <div class="film-card-description-text">
-                        <p>{{ film[1] }}</p>
+                        <div class="film-card-info-box">
+                            <p>{{ film[1] }}</p>
                         </div>
-                        <div class="film-card-info-block">
+                        <div class="film-card-info-box">
                             <p>Дата {{film[2]}}</p>
                             <p>Режисёр: {{director[0]}} {{director[1]}}</p>
                             <p>Жанр: {{ film[3] }}</p>
