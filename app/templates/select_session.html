@@ -98,5 +98,46 @@
             </div>
         </footer>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Используем делегирование событий для динамических кнопок
+            document.querySelector('.seating-area').addEventListener('click', function(e) {
+                if (e.target.classList.contains('seat') && !e.target.disabled) {
+                    e.target.classList.toggle('selected');
+                    updateSelection();
+                }
+            });
+
+            function getRowAndSeat(button) {
+                const td = button.parentElement;
+                const tr = td.parentElement;
+                const rowNumber = tr.querySelector('.row-number').textContent.replace(/\D/g, '');
+                const seatNumber = button.textContent.trim();
+                return { row: rowNumber, seat: seatNumber };
+            }
+
+            function updateSelection() {
+                const selected = document.querySelectorAll('.seat.selected');
+                const selectedSeats = document.getElementById('selected-seats');
+                const totalPrice = document.getElementById('total-price');
+                const bookButton = document.getElementById('book-button');
+                const pricePerSeat = parseInt(totalPrice.dataset.price);
+
+                const selectedSeatsArray = Array.from(selected).map(btn => {
+                    const info = getRowAndSeat(btn);
+                    return `Ряд ${info.row}, Место ${info.seat}`;
+                });
+                selectedSeats.textContent = selectedSeatsArray.join('; ');
+                totalPrice.textContent = (selected.length * pricePerSeat).toString();
+                bookButton.disabled = selected.length === 0;
+            }
+
+            document.getElementById('book-button').addEventListener('click', function() {
+                const selectedSeatIds = Array.from(document.querySelectorAll('.seat.selected'))
+                    .map(seat => seat.dataset.seatId);
+                window.location.href = "{{ url_for('booking.confirme_booking') }}?seats=" + selectedSeatIds.join(',') + "&session_id={{ session_info[0] }}";
+            });
+        });
+    </script>
 </body>
 </html>

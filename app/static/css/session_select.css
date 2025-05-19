@@ -100,6 +100,10 @@ session_select.css — стили для страницы выбора мест:
 
 .selected {
     background-color: #A3DAA3;
+    /* Добавим визуальный эффект для выбранного места */
+    outline: 3px solid #4A6382;
+    box-shadow: 0 0 8px #4A6382;
+    z-index: 2;
 }
 
 .booking-summary {
