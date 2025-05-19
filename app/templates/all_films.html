@@ -15,25 +15,6 @@
         </div>
     </header>
     <div class="container">
-        <div class="date-filter">
-            <div class="date-card">
-                <button class="month-nav">&#9664;</button>
-                <span class="current-month">Май 2025</span>
-                <button class="month-nav">&#9654;</button>
-                <form id="date-form" action="{{ url_for('all_films.all_films') }}" method="get" style="margin:0;">
-                    <input type="hidden" name="date" id="selected-date">
-                    <div class="week-buttons">
-                        <button type="button" class="day-button" data-date="2025-05-01">1<br>Пн</button>
-                        <button type="button" class="day-button" data-date="2025-05-02">2<br>Вт</button>
-                        <button type="button" class="day-button" data-date="2025-05-03">3<br>Ср</button>
-                        <button type="button" class="day-button" data-date="2025-05-04">4<br>Чт</button>
-                        <button type="button" class="day-button" data-date="2025-05-05">5<br>Пт</button>
-                        <button type="button" class="day-button" data-date="2025-05-06">6<br>Сб</button>
-                        <button type="button" class="day-button" data-date="2025-05-07">7<br>Вс</button>
-                    </div>
-                </form>
-            </div>
-        </div>
 
         <!-- Форма фильтрации -->
         <div class="filter-container">
