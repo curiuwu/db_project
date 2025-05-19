@@ -1,0 +1,20 @@
+.booking-details {
+    display: grid;
+    place-items: center; /* Центрирование по горизонтали и вертикали */
+    width: 100%;
+    text-align: center;
+    margin: 20px auto;
+    background-color: #E3C39D; /* Светлый фон */
+    border-radius: 30px; 
+    box-shadow: 0 4px 6px rgb(176, 115, 0);
+    margin-bottom: 20px;
+    margin-top: 120px;
+}
+
+.container a{
+    display: grid;
+    place-items: center; /* Центрирование по горизонтали и вертикали */
+    text-align: center;
+    width: 150px;
+    margin: 20px auto;
+}

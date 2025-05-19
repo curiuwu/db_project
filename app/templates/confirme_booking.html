@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Подтверждение бронирования - {{ session_info[4] }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/confirme_booking.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_confirme.css') }}">
 </head>
 <body>
     <header class="header">
@@ -22,7 +22,6 @@
             <div class="session-info">
                 <p class="date">Дата: {{ session_info[1].strftime('%d.%m.%Y') }}</p>
                 <p class="time">Время: {{ session_info[2].strftime('%H:%M')}}</p>
-                <p class="duration">Продолжительность: {{ session_info[5] }} минут</p>
             </div>
 
             <div class="selected-seats">
@@ -38,9 +37,8 @@
                 <p class="price-per-ticket">Цена за билет: {{ session_info[3] }} ₽</p>
                 <p class="total-price">Итого к оплате: {{ total_price }} ₽</p>
             </div>
-
-            <a href="{{ url_for('payment.confirme_payment', booking_id=['booking_id']) }}" class="payment-link">Перейти к оплате</a>
         </div>
+        <a href="{{ url_for('payment.confirme_payment', booking_id=['booking_id']) }}" class="films-link button">Перейти к оплате</a>
     </div>
 
 

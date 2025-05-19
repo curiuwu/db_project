@@ -8,3 +8,4 @@ from .get_user_info import get_user_info
 from .get_session_info_by_id import get_session_info_by_id
 from .get_hall import get_hall
 from .get_seats import get_seats
+from .get_ticket_info import get_ticket_info

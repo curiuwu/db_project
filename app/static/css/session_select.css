@@ -70,7 +70,7 @@ session_select.css — стили для страницы выбора мест:
 }
 
 .seat:disabled {
-    background-color: #E0E0E0;
+    background-color: #E0A3A3;
     cursor: not-allowed;
 }
 
