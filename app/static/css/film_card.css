@@ -1,0 +1,52 @@
+.connector {
+    height: 200px;
+}
+
+.name_card  {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    opacity: .85;
+    background-color: #E3C39D;            /* Светлый фон карточки */
+    box-shadow: 0 4px 6px rgb(176, 115, 0);
+}
+
+.container  {
+    margin: 10px;
+    min-height: 96vh
+}
+
+.film {
+    max-width: 150px
+}
+
+.film_card  {
+    display: grid;
+    justify-content: top;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    width: 80%; /* Устанавливаем ширину для центрирования */
+}
+
+.rating {
+    font-family: Arial, sans-serif;
+}
+
+.rating__wrapper {
+    display: flex;       /* Включаем flex-контейнер */
+    align-items: center; /* Выравниваем по вертикали */
+    gap: 8px;            /* Отступ между текстом и иконкой */
+}
+
+.film {
+    margin: 0;           /* Убираем стандартные отступы */
+    font-size: 18px;     /* Размер текста */
+}
+
+.rating__icon {
+    width: 30px;
+    height: 30px;
+    fill: #FFFF55;       /* Цвет иконки */
+    flex-shrink: 0;      /* Запрещаем сжатие */
+}
