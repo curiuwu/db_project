@@ -50,12 +50,12 @@
                         <div class="tickets-card">
                             <h2>Мои билеты</h2>
                             <div class="tickets-list">
-                                {% for ticket in tickets %}
+                                {% for t in ticket %}
                                 <div class="ticket-item">
                                     <div class="ticket-info">
-                                        <p>Дата: {{ ticket[0] }}</p>
-                                        <p>Время: {{ ticket[1] }}</p>
-                                        <p>Место: {{ ticket[2] }}</p>
+                                        <p>Дата: {{ t[0] }}</p>
+                                        <p>Время: {{ t[1] }}</p>
+                                        <p>Место: {{ t[2] }}</p>
                                     </div>
                                     <button class="download-btn">
                                         <img src="{{ url_for('static', filename='images/download-icon.svg') }}" alt="Скачать">
@@ -82,9 +82,9 @@
                 </div>
                 <div class="footer-social">
                     <h3>Социальные сети</h3>
-                    <span>VK</span>
-                    <span>Telegram</span>
-                    <span>Instagram</span>
+                    <a href="https://vk.com" target="_blank">VK</a>
+                    <a href="https://telegram.org" target="_blank">Telegram</a>
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
                 </div>
             </div>
         </footer>
