@@ -30,17 +30,15 @@ a {
 
 /* Стили для шапки сайта */
 .header {
-    background-color: #191919;            /* Тёмный фон */
+    background-color: #1D1D1D;            /* Тёмный фон */
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
-    text-align: center;                   /* Центрируем текст */
     display: flex;                        /* Гибкое расположение элементов */
-    justify-content: end;      /* Элементы справа */
+    justify-content: space-between;      /* Логотип слева, кнопки справа */
     align-items: center;                  /* Выравнивание по центру по вертикали */
-    padding: 20px;                        /* Уменьшаем внутренний отступ для уменьшения пространства под header */                      
-    align-items: center;
+    padding: 20px 100px 20px 40px;        /* Больше отступ справа, меньше слева */
     box-shadow: 0 2px 5px rgba(74, 99, 130, 0.5); /* Add subtle shadow */
     margin-bottom: 0; /* Убираем отступ снизу */
     z-index: 9999; /* Устанавливаем высокий z-index, чтобы header был выше всего остального */
@@ -50,6 +48,10 @@ a {
     margin-left: 20px; /* Добавляем расстояние между кнопками */
 }
 
+.logo {
+    height: 50px;
+    margin-left: 150px;
+}
 /* Стили для футера */
 .footer {
     background-color: #0F0F0F;            /* Тёмный фон */
