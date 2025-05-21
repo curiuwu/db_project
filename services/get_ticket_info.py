@@ -10,7 +10,8 @@ def get_ticket_info(user_id):
         INNER JOIN sessions ON tickets.session_id = sessions.session_id
         INNER JOIN films on sessions.film_id = films.film_id
         JOIN seats ON tickets.place_id = seats.seat_id
-        WHERE tickets.user_id = %s        
+        WHERE tickets.user_id = %s 
+        order by sessions.date  ASC      
         """, (user_id,))  # Ensure user_id is passed as a tuple
 
     ticket = cur.fetchall()
