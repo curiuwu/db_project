@@ -1,52 +1,208 @@
-.connector {
-    height: 200px;
-}
-
-.name_card  {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    opacity: .85;
-    background-color: #E3C39D;            /* Светлый фон карточки */
-    box-shadow: 0 4px 6px rgb(176, 115, 0);
-}
-
-.container  {
+/* Основные стили контейнера */
+.container {
+    display: flex;
+    flex-direction: column;
     margin: 10px;
-    min-height: 96vh
-}
-
-.film {
-    max-width: 150px
-}
-
-.film_card  {
-    display: grid;
-    justify-content: top;
-    align-items: center;
+    min-height: 96vh;
     font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    width: 80%; /* Устанавливаем ширину для центрирования */
 }
 
+/* Шапка сайта */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f8f8;
+}
+
+.button-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.button {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: white;
+    background-color: #333;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #555;
+}
+
+/* Декоративный разделитель */
+.connector {
+    height: 50px;
+
+}
+
+/* Основной контент - двухколоночный макет */
+.main-content {
+    display: flex;
+    flex: 1;
+    gap: 2rem;
+    margin-top: 20px;
+}
+
+/* Левая колонка (40%) - информация о фильме */
+.film-container {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.film-container h1 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 2.2rem;
+    text-align: center;
+}
+
+/* Стили для постера */
+.poster-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.poster-of-film {
+    width: 80%;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для информации о фильме */
+.film-info {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.film-info p {
+    margin: 0.8rem 0;
+    line-height: 1.5;
+    color: #444;
+}
+
+.film-info strong {
+    color: #333;
+}
+
+/* Стили для рейтинга */
 .rating {
-    font-family: Arial, sans-serif;
+    background-color: #E3C39D;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 1rem 0;
 }
 
 .rating__wrapper {
-    display: flex;       /* Включаем flex-контейнер */
-    align-items: center; /* Выравниваем по вертикали */
-    gap: 8px;            /* Отступ между текстом и иконкой */
-}
-
-.film {
-    margin: 0;           /* Убираем стандартные отступы */
-    font-size: 18px;     /* Размер текста */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
 .rating__icon {
     width: 30px;
     height: 30px;
-    fill: #FFFF55;       /* Цвет иконки */
-    flex-shrink: 0;      /* Запрещаем сжатие */
+    fill: #FFFF55;
+}
+
+/* Правая колонка - сеансы */
+.right-content {
+    flex: 1;
+}
+
+.sessions {
+    background-color: #E3C39D;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sessions h2 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.session-button {
+    display: block;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+.session-button:hover {
+    background-color: #E3C39D;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(176, 115, 0, 0.3);
+}
+
+.session-button p {
+    margin: 0;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.similar-films {
+    margin-top: 2rem;
+    background-color: #E3C39D;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.similar-films h1 {
+    color: #333;
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.film-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.similar-poster {
+    width: 70%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.8rem;
+    transition: transform 0.3s;
+}
+
+.similar-poster:hover {
+    transform: scale(1.03);
+}
+
+.film-card h2 {
+    color: #333;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 0;
 }
