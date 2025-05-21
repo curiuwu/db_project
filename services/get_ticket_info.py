@@ -5,9 +5,10 @@ def get_ticket_info(user_id):
     connection = get_db_connetction()
     cur = connection.cursor()
     cur.execute("""
-        SELECT sessions.date, sessions.time, seats.seat_number
+        SELECT sessions.date, sessions.time, seats.seat_number, films.title
         FROM tickets
-        JOIN sessions ON tickets.session_id = sessions.session_id
+        INNER JOIN sessions ON tickets.session_id = sessions.session_id
+        INNER JOIN films on sessions.film_id = films.film_id
         JOIN seats ON tickets.place_id = seats.seat_id
         WHERE tickets.user_id = %s        
         """, (user_id,))  # Ensure user_id is passed as a tuple

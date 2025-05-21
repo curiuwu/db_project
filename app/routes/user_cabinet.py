@@ -19,5 +19,5 @@ def personal_account():
         flash('Ошибка получения данных пользователя')
         return redirect(url_for('auth.login'))
 
-    ticket = get_ticket_info(user_id)[:4]
-    return render_template('personal_account.html', user=user, ticket=ticket)
+    tickets = get_ticket_info(user_id)[:4]
+    return render_template('personal_account.html', user=user, tickets=tickets)

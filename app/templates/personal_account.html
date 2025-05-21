@@ -50,8 +50,12 @@
                         <div class="tickets-card">
                             <h2>Мои билеты</h2>
                             <div class="tickets-list">
-                                {% for t in ticket %}
-                                <div class="ticket-item">
+                                {% for t in tickets %}
+                                <div class="ticket-item"
+                                     data-title="{{ t[3] }}"
+                                     data-date="{{ t[0] }}"
+                                     data-time="{{ t[1] }}"
+                                     data-seat="{{ t[2] }}">
                                     <div class="ticket-info">
                                         <p>Дата: {{ t[0] }}</p>
                                         <p>Время: {{ t[1] }}</p>
@@ -89,5 +93,47 @@
             </div>
         </footer>
     </div>
+     <div id="ticket-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Информация о билете</h3>
+            <p id="modal-title"></p>
+            <p id="modal-date"></p>
+            <p id="modal-time"></p>
+            <p id="modal-seat"></p>
+        </div>
+    </div>
+
+    <!-- Добавим в конец <body> перед </body> -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('ticket-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDate = document.getElementById('modal-date');
+            const modalTime = document.getElementById('modal-time');
+            const modalSeat = document.getElementById('modal-seat');
+            const closeBtn = document.querySelector('.close-btn');
+
+            document.querySelectorAll('.ticket-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    modalTitle.textContent = 'Фильм: ' + item.dataset.title;
+                    modalDate.textContent = 'Дата: ' + item.dataset.date;
+                    modalTime.textContent = 'Время: ' + item.dataset.time;
+                    modalSeat.textContent = 'Место: ' + item.dataset.seat;
+                    modal.classList.remove('hidden');
+                });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
