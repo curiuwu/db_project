@@ -8,7 +8,9 @@
 </head>
 <body>
     <header class="header">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
+            <a href="{{ url_for('main.main_page') }}">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
+            </a>
             <div class="button-wrapper">
                 <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Каталог</a>
                 <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
