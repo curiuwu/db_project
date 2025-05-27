@@ -13,9 +13,9 @@
             <header class="header">
                     <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
                     <div class="button-wrapper">
-                        <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
-                        <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
-                        <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
+                        <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Каталог</a>
+                    <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
+                    <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
                     </div>
             </header>
             
@@ -57,6 +57,7 @@
                                      data-time="{{ t[1] }}"
                                      data-seat="{{ t[2] }}">
                                     <div class="ticket-info">
+                                        <p>Фильм: {{ t[3] }}</p>
                                         <p>Дата: {{ t[0] }}</p>
                                         <p>Время: {{ t[1] }}</p>
                                         <p>Место: {{ t[2] }}</p>

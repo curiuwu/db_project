@@ -12,9 +12,9 @@
             <header class="header">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
                 <div class="button-wrapper">
-                    <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+                    <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Каталог</a>
+                    <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
                     <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
-                    <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
                 </div>
             </header>
             <div class="container">
@@ -29,7 +29,7 @@
                             <p>{{ film[1] }}</p>
                         </div>
                         <div class="film-card-info-box">
-                            <p>Дата {{film[2]}}</p>
+                            <p>Дата: {{film[2]}}</p>
                             <p>Режисёр: {{director[0]}} {{director[1]}}</p>
                             <p>Жанр: {{ film[3] }}</p>
                         </div>

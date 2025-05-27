@@ -11,28 +11,40 @@
         <header class="header">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
                 <div class="button-wrapper">
-                    <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+                    <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Каталог</a>
+                    <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
                     <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
                 </div>
         </header>
             
         <div class="container">
             <main class="center-content">
-                <div class="session-info">
-                    <p class="date">Дата: {{ session_info[1].strftime('%d.%m.%Y') }}</p>
-                    <p class="time">Время: {{ session_info[2].strftime('%H:%M') }}</p>
-                    <p class="price">Цена: {{ session_info[3] }} ₽</p>
+                <!-- Название фильма по центру -->
+                <h1 class="film-card-title session-film-title">{{ session_info[4] }}</h1>
+                <!-- Информация о сеансе в три карточки по центру -->
+                <div class="session-info-row">
+                    <div class="session-info-card">
+                        <p class="date">Дата</p>
+                        <p class="session-info-value">{{ session_info[1].strftime('%d.%m.%Y') }}</p>
+                    </div>
+                    <div class="session-info-card">
+                        <p class="time">Время</p>
+                        <p class="session-info-value">{{ session_info[2].strftime('%H:%M') }}</p>
+                    </div>
+                    <div class="session-info-card">
+                        <p class="price">Цена</p>
+                        <p class="session-info-value">{{ session_info[3] }} ₽</p>
+                    </div>
                 </div>
-
+                {% set rows = {} %}
+                {% for seat in seats %}
+                    {% set _ = rows.setdefault(seat[1], []).append(seat) %}
+                {% endfor %}
+                {% set max_seats_in_row = rows.values()|map('length')|max %}
                 <div class="screen-container">
-                    <div class="screen">ЭКРАН</div>
+                    <div class="screen" style="width: {{ max_seats_in_row * 60 }}px;">ЭКРАН</div>
                 </div>
-
-                <div class="seating-area">
-                    {% set rows = {} %}
-                    {% for seat in seats %}
-                        {% set _ = rows.setdefault(seat[1], []).append(seat) %}
-                    {% endfor %}
+                <div class="seating-area" style="width: {{ max_seats_in_row * 60 }}px;">
                     <table class="seats-table">
                         <tbody>
                         {% for row_num, row_seats in rows.items()|sort %}
@@ -67,13 +79,12 @@
                         <span>Выбрано</span>
                     </div>
                 </div>
-
                 <div class="booking-summary">
-                    <h3>Выбранные места:</h3>
-                    <div id="selected-seats"></div>
-                    <p>Итого: <span id="total-price" data-price="{{ session_info[3] }}">0</span> ₽</p>
+                    <h6>Выбранные места</h6>
+                    <div class="selected-seats-cards" id="selected-seats"></div>
+                    <p class="booking-summary-total">Итого: <span id="total-price" data-price="{{ session_info[3] }}">  0</span> ₽</p>
                 </div>
-                <button id="book-button" class="book-button" disabled>Забронировать</button>
+                <button id="book-button" class="book-button login-btn" disabled>Забронировать</button>
             </main>
         </div>
         <footer class="footer">
@@ -122,11 +133,15 @@
                 const bookButton = document.getElementById('book-button');
                 const pricePerSeat = parseInt(totalPrice.dataset.price);
 
-                const selectedSeatsArray = Array.from(selected).map(btn => {
+                // Формируем карточки для каждого выбранного места
+                selectedSeats.innerHTML = '';
+                Array.from(selected).forEach(btn => {
                     const info = getRowAndSeat(btn);
-                    return `Ряд ${info.row}, Место ${info.seat}`;
+                    const card = document.createElement('div');
+                    card.className = 'selected-seat-card';
+                    card.textContent = `Ряд ${info.row}, Место ${info.seat}`;
+                    selectedSeats.appendChild(card);
                 });
-                selectedSeats.textContent = selectedSeatsArray.join('; ');
                 totalPrice.textContent = (selected.length * pricePerSeat).toString();
                 bookButton.disabled = selected.length === 0;
             }

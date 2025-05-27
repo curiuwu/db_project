@@ -162,9 +162,11 @@
 .tickets-card {
     background-color: #4A6382;
     border-radius: 30px;
-    padding: 24px; /* увеличен padding */
-    width: 100%;
+    padding: 18px; /* уменьшен padding */
+    width: 340px; /* фиксированная ширина, чтобы карточка не растягивалась */
+    max-width: 100%;
     box-sizing: border-box;
+    margin: 0 auto;
 }
 
 .tickets-card h2 {
@@ -186,11 +188,13 @@
     background-color: #E3C39D;
     border-radius: 18px;
     border: 2px solid #ffddba;
-    padding: 14px; /* увеличен padding */
+    padding: 8px 10px; /* уменьшен padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.1em;
+    font-size: 0.98em; /* чуть меньше шрифт */
+    min-width: 0;
+    max-width: 100%;
 }
 
 .ticket-info {

@@ -15,6 +15,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', sans-serif;      /* Шрифт Lato */
     font-weight: bold;                    /* Жирный шрифт */
+    color: white
 }
 
 /* Стили для ссылок */
@@ -67,6 +68,7 @@ a {
     background-color: #4A6382;            /* Синий фон */
     color: white;                         /* Белый текст */
     font-family: 'Lato', sans-serif;      /* Шрифт Lato */
+    font-weight: bold;                    /* Жирный текст */
     border: none;                         /* Без рамки */
     border-radius: 30px;                   /* Скругление углов */
     padding: 10px 20px;                   /* Внутренний отступ */
@@ -120,20 +122,17 @@ input::placeholder, textarea::placeholder {
     transition: transform 0.3s ease; /* Плавный эффект при наведении */
 }
 .film-card h2 {
-    color: #333;
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 1.5em;
 }
 
 .film-card p {
-    color: #666;
     line-height: 1.5;
     margin-bottom: 10px;
 }
 
 .film-card .director {
-    color: #888;
     font-style: italic;
 }
 
@@ -246,4 +245,9 @@ input::placeholder, textarea::placeholder {
 .footer-contacts, .footer-social {
     text-align: center;
     min-width: 200px;
+}
+
+/* Устанавливаем белый цвет текста по умолчанию для всех элементов, кроме ссылок в подвале и элементов с цветом #4A6382 */
+body, h1, h2, h3, h4, h5, h6, p, div, span, label, input, textarea, select {
+    color: #fff;
 }

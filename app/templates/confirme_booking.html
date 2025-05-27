@@ -11,36 +11,45 @@
         <header class="header">
             <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
             <div class="button-wrapper">
-                <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
+                <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Каталог</a>
+                <a href="{{ url_for('main.main_page') }}" class="main-page-link button">Главная страница</a>
                 <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
-                <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
             </div>
         </header>
         <main>
             <div class="container">
 
-                <div class="booking-details">
-                    <h2>{{ session_info[4] }}</h2>
-                    <div class="session-info">
-                        <p class="date">Дата: {{ session_info[1].strftime('%d.%m.%Y') }}</p>
-                        <p class="time">Время: {{ session_info[2].strftime('%H:%M')}}</p>
+                 <div class="booking-details-flex">
+                    <div class="booking-card booking-title-card">
+                        <h2 class="booking-title">{{ session_info[4] }}</h2>
                     </div>
-
-                    <div class="selected-seats">
-                        <h3>Выбранные места:</h3>
-                        <ul>
+                    <div class="booking-info-row">
+                        <div class="booking-card booking-info-card">
+                            <div class="booking-info-label">Дата</div>
+                            <div class="booking-info-value">{{ session_info[1].strftime('%d.%m.%Y') }}</div>
+                        </div>
+                        <div class="booking-card booking-info-card">
+                            <div class="booking-info-label">Время</div>
+                            <div class="booking-info-value">{{ session_info[2].strftime('%H:%M') }}</div>
+                        </div>
+                        <div class="booking-card booking-info-card">
+                            <div class="booking-info-label">Цена за 1 билет</div>
+                            <div class="booking-info-value">{{ session_info[3] }} ₽</div>
+                        </div>
+                    </div>
+                    <div class="booking-card booking-seats-list">
+                        <div class="booking-info-label">Выбранные места:</div>
+                        <div class="selected-seats-cards">
                             {% for seat in selected_seats %}
-                            <li>Ряд {{ seat[1] }}, Место {{ seat[2] }}</li>
+                            <div class="selected-seat-card">Ряд {{ seat[1] }}, Место {{ seat[2] }}</div>
                             {% endfor %}
-                        </ul>
+                        </div>
                     </div>
-
-                    <div class="price-summary">
-                        <p class="price-per-ticket">Цена за билет: {{ session_info[3] }} ₽</p>
-                        <p class="total-price">Итого к оплате: {{ total_price }} ₽</p>
+                    <div class="booking-card booking-summary-total">
+                        Итого <span>{{ total_price }}</span> ₽
                     </div>
                 </div>
-                <a href="{{ url_for('payment.confirme_payment', booking_id=['booking_id']) }}" class="films-link button">Заказать</a>
+                <a href="{{ url_for('payment.confirme_payment', booking_id=['booking_id']) }}" class="confirm-booking-btn">Заказать</a>
             </div>
         </main>
         <footer class="footer">
