@@ -4,10 +4,11 @@ from services import get_genres
 
 all_films_bp = Blueprint('all_films', __name__)
 
-#TODO сделать перключение по дням
+
+# TODO сделать перключение по дням
 @all_films_bp.route('/all_films')
 def all_films():
-    genre = request.args.get('genre')  
+    genre = request.args.get('genre')
     date = request.args.get('date')
 
     connection = get_db_connetction()
@@ -74,4 +75,3 @@ def all_films():
     genres = get_genres()
 
     return render_template('all_films.html', films=films_data, genres=genres)
-

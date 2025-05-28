@@ -1,8 +1,5 @@
-from app.db import get_db_connetction
-
 
 def get_ticket_info(user_id):
-    connection = get_db_connetction()
     cur = connection.cursor()
     cur.execute("""
         SELECT sessions.date, sessions.time, seats.seat_number
@@ -15,4 +12,4 @@ def get_ticket_info(user_id):
     ticket = cur.fetchall()
     cur.close()
     connection.close()
-    return ticket  # Return ticket info or an empty list if none found
+    return 0

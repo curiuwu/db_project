@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, request, jsonify, redirect, url_for, make_response
-from app.db import get_db_connetction
+from app.db import DBSingleton
 from datetime import datetime
 
 booking_bp = Blueprint("booking", __name__)

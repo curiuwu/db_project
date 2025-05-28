@@ -12,8 +12,7 @@
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="logo">
         <div class="button-wrapper">
             <a href="{{ url_for('all_films.all_films') }}" class="films-link button">Все фильмы</a>
-            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный
-                кабинет</a>
+            <a href="{{ url_for('user_cabinet.personal_account') }}" class="personal-account-link button">Личный кабинет</a>
             <a href="{{ url_for('main.main_page') }}" class="films-link button">Главная страница</a>
         </div>
     </header>
@@ -23,7 +22,6 @@
         <div class="film-container">
             <h1>{{ film[0] }}</h1>
 
-            <!-- Рейтинг IMDb (раскомментируйте при необходимости) -->
             <div class="rating">
                 <h3>IMDb Рейтинг</h3>
                 <div class="rating__wrapper">
@@ -34,17 +32,44 @@
                 </div>
             </div>
 
-            <!-- Постер фильма -->
             <div class="poster-wrapper">
                 <img class="poster-of-film" src="{{ film[5] }}" alt="Постер фильма {{ film[0] }}">
             </div>
 
-            <!-- Информация о фильме -->
             <div class="film-info">
                 <p><strong>Описание:</strong> {{ film[1] }}</p>
                 <p><strong>Дата выпуска:</strong> {{ film[2] }}</p>
-                <p><strong>Режиссёр:</strong> {{ director[0] }} {{ director[1]}} </p>
+                <p><strong>Режиссёр:</strong> {% if directors %}{{ directors[0] }} {{ directors[1] }}{% else %}Не указан{% endif %}</p>
                 <p><strong>Жанр:</strong> {{ film[3] }}</p>
+            </div>
+
+            <div class="comments-section">
+                <h2>Комментарии</h2>
+
+                <!-- Форма для добавления комментария -->
+                <form method="POST" class="comment-form">
+                    <textarea name="comment_text" placeholder="Оставьте ваш комментарий..." required></textarea>
+                    <button type="submit" class="submit-comment">Отправить</button>
+                </form>
+
+                <!-- Список комментариев -->
+                <div class="comments-list">
+                    {% if comments %}
+                        {% for comment in comments %}
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">{{ comment.username }}</span>
+                                <span class="comment-date">{{ comment.timestamp }}</span>
+                            </div>
+                            <div class="comment-text">
+                                {{ comment.text }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-comments">Пока нет комментариев. Будьте первым!</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
 
@@ -53,33 +78,25 @@
             <div class="sessions">
                 <h2 class="name_card">Сеансы</h2>
                 {% for session in sessions %}
-                <a class="session-button"
-                   href="{{ url_for('session_select.select_session', session_id = session[0]) }}">
+                <a class="session-button" href="{{ url_for('session_select.select_session', session_id = session[0]) }}">
                     <p>{{ session[1] }} - {{ session[2] }} руб.</p>
                 </a>
                 {% endfor %}
             </div>
 
-            <!-- Блок "Из того же жанра" -->
             <div class="similar-films">
                 <h1>Из того же жанра</h1>
-
-                <!-- Пример карточки фильма (повторите для каждого похожего фильма) -->
                 <div class="film-card">
-                    <img class="similar-poster" src="{{ url_for('static', filename='img/similar1.jpg') }}"
-                         alt="Постер фильма">
+                    <img class="similar-poster" src="{{ url_for('static', filename='img/similar1.jpg') }}" alt="Постер фильма">
                     <h2>Название фильма 1</h2>
                 </div>
-
                 <div class="film-card">
-                    <img class="similar-poster" src="{{ url_for('static', filename='img/similar2.jpg') }}"
-                         alt="Постер фильма">
+                    <img class="similar-poster" src="{{ url_for('static', filename='img/similar2.jpg') }}" alt="Постер фильма">
                     <h2>Название фильма 2</h2>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>
