@@ -26,24 +26,6 @@ h1 {
     color: #fff;
     font-size: 1.2em;
     font-weight: bold;
-    object-fit: cover;
-    /* Для анимации смены цвета */
-    animation: posterColorChange 2s linear infinite alternate;
-}
-
-@keyframes posterColorChange {
-    0% {
-        background: linear-gradient(0deg, #E3C39D 0%, #4A6382 100%);
-    }
-    25% {
-        background: linear-gradient(60deg, #ffddb4 0%, #4A6382 100%);
-    }
-    50% {
-        background: linear-gradient(120deg, #ffddb4 0%, #4A6382 100%);
-    }
-    100% {
-        background: linear-gradient(180deg, #E3C39D 0%, #4A6382 100%);
-    }
 }
 
 /*___________________________________________________________________________*/

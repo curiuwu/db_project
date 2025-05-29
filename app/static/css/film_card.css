@@ -121,7 +121,6 @@
     font-size: 1.1em;
     line-height: 1.6;
     text-align: left;
-    font-style: italic;
     box-sizing: border-box;
     margin-top: 0;
     transition: background 0.2s, border-color 0.2s;
@@ -130,8 +129,7 @@
 }
 .film-card-info-box p {
     margin: 0 0 8px 0;
-    color: #4A6382;
-    font-style: italic;
+    color: #ffffff;
     font-weight: bold;
 }
 .film-card-info-box p:last-child {
@@ -164,9 +162,10 @@
 
 .session-button {
     display: flex;
+    border: 3px solid #ffddb4;
     align-items: center;
     justify-content: center;
-    background: #E3C39D;
+    background: #4A6382;;
     color: #fff;
     font-weight: bold;
     font-size: 1em;
@@ -185,7 +184,6 @@
     padding: 0 18px;
     flex: 1 1 auto;
     box-sizing: border-box;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -196,7 +194,7 @@
     font-weight: bold;
 }
 .session-button:hover {
-    background: #4A6382;
+    background: #5a7ab2;
     color: #fff;
 }
 
