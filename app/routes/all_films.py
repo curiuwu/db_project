@@ -1,77 +1,50 @@
 from flask import Blueprint, render_template, request
-from app.db import get_db_connetction
-from services import get_genres
+from app.db import DBSingleton
 
 all_films_bp = Blueprint('all_films', __name__)
 
 
-# TODO сделать перключение по дням
 @all_films_bp.route('/all_films')
 def all_films():
     genre = request.args.get('genre')
     date = request.args.get('date')
+    db = DBSingleton()
 
-    connection = get_db_connetction()
-    cur = connection.cursor()
+    # Базовый запрос для получения фильмов
+    base_query = """SELECT DISTINCT
+                    f.film_id, 
+                    f.title, 
+                    f.description,
+                    d.first_name || ' ' || d.second_name AS director,
+                    f.poster_link
+                FROM films f
+                JOIN directors d ON f.director_id = d.director_id
+                LEFT JOIN film_genre fg ON f.film_id = fg.film_id
+                LEFT JOIN genres g ON fg.genre_id = g.genre_id"""
 
-    # Base query to fetch films
-    base_query = """SELECT DISTINCT ON (films.film_id) 
-                        films.film_id, 
-                        films.title, 
-                        films.description, 
-                        genres.genre_name, 
-                        films.release_date, 
-                        films.poster_link 
-                    FROM film_genre
-                    JOIN genres ON film_genre.genre_id = genres.genre_id
-                    JOIN films ON film_genre.film_id = films.film_id"""
     conditions = []
     params = []
 
-    # Add filter for genre if provided
+    # Фильтр по жанру
     if genre:
-        conditions.append("film_genre.genre_id = %s")
+        conditions.append("g.genre_id = %s")
         params.append(genre)
 
-    # Combine base query with conditions
+    # Фильтр по дате
+    if date:
+        conditions.append("EXISTS (SELECT 1 FROM sessions s WHERE s.film_id = f.film_id AND s.date = %s)")
+        params.append(date)
+
+    # Формируем окончательный запрос
     if conditions:
-        query = f"{base_query} WHERE " + "".join(conditions)
+        query = f"{base_query} WHERE {' AND '.join(conditions)}"
     else:
         query = base_query
 
-    # Execute the query
-    cur.execute(query, tuple(params))
-    films = cur.fetchall()
+    # Выполняем запрос
+    films = db.fetchall(query, tuple(params) if params else None)
 
-    # Fetch directors for all films
-    cur.execute("""SELECT films.film_id, directors.first_name, directors.second_name
-                   FROM films
-                   JOIN directors ON films.director_id = directors.director_id""")
-    director = cur.fetchall()
+    # Получаем жанры для фильтра
+    genres = db.fetchall("SELECT genre_id, genre_name FROM genres")
 
-    # Map directors to their respective films
-    director_map = {
-        film_id: f"{first_name} {second_name}"
-        for film_id, first_name, second_name in director
-    }
-
-    # Prepare the films data for rendering
-    films_data = []
-    for film in films:
-        film_id, title, description, genre, release_date, poster_link = film
-        director = director_map.get(film_id, "Неизвестно")
-        films_data.append({
-            "title": title,
-            "description": description,
-            "genre": genre,
-            "release_date": release_date,
-            "poster": poster_link,
-            "director": director
-        })
-
-    cur.close()
-    connection.close()
-
-    genres = get_genres()
-
-    return render_template('all_films.html', films=films_data, genres=genres)
+    return render_template('all_films.html', films=films, genres=genres)

@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, flash, url_for, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from app.db import get_db_connetction
+from app.db import DBSingleton
 from urllib.parse import urlparse, urljoin
 
 auth_bp = Blueprint('auth', __name__)
@@ -17,6 +17,7 @@ def is_safe_url(target):
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
+    cur = DBSingleton()
     if request.method == 'POST':
         first_name = request.form.get('first_name')
         second_name = request.form.get('second_name')
@@ -29,28 +30,24 @@ def register():
             return redirect(url_for('auth.register'))
 
         hashed_password = generate_password_hash(password)
-        connection = get_db_connetction()
-        cur = connection.cursor()
 
         cur.execute('SELECT user_id FROM users where first_name = %s AND second_name = %s', (first_name, second_name,))
 
         if cur.fetchone():
             flash('Такой пользователь уже существует')
             cur.close()
-            connection.close()
             return redirect(url_for('auth.register'))
 
         cur.execute("""INSERT INTO users (first_name, second_name, age, email, hashed_password)
                      VALUES(%s, %s, %s, %s, %s)""", (first_name, second_name, age, email, hashed_password))
-        connection.commit()
         cur.close()
-        connection.close()
         return redirect(url_for('auth.login'))
     return render_template('register.html')
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    cur = DBSingleton()
     next_url = request.args.get('next')  # Получаем параметр next из запроса
     if request.method == 'POST':
         email = request.form.get('email')
@@ -60,12 +57,9 @@ def login():
             flash('Введите данные во все поля')
             return redirect(url_for('auth.login', next=next_url))
 
-        connection = get_db_connetction()
-        cur = connection.cursor()
         cur.execute("SELECT user_id, hashed_password FROM users WHERE email = %s", (email,))
         user = cur.fetchone()
         cur.close()
-        connection.close()
 
         if user and check_password_hash(user[1], password):
             session['user_id'] = user[0]
